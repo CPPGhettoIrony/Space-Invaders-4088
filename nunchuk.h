@@ -6,6 +6,8 @@
 #include "i2c_lpc40xx.h"
 #include "gpio_lpc40xx.h"
 
+#define NUNCHUK_DIRECCION 0x52
+
 void nunchuk_inicializar();
 void nunchuk_leer(uint8_t* data);
 
