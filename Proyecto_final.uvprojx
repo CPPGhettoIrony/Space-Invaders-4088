@@ -409,6 +409,16 @@
               <FileType>5</FileType>
               <FilePath>.\sprites.h</FilePath>
             </File>
+            <File>
+              <FileName>jugador.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\jugador.c</FilePath>
+            </File>
+            <File>
+              <FileName>jugador.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\jugador.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
