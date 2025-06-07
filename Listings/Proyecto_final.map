@@ -6,24 +6,17 @@ Section Cross References
 
     main.o(.text) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     main.o(.text.main) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
-    main.o(.text.main) refers to jugador.o(.text.jugador_crear) for jugador_crear
+    main.o(.text.main) refers to jugador.o(.text.juego_inicializar) for juego_inicializar
     main.o(.text.main) refers to nunchuk.o(.text.nunchuk_inicializar) for nunchuk_inicializar
     main.o(.text.main) refers to nunchuk.o(.text.nunchuk_leer) for nunchuk_leer
     main.o(.text.main) refers to glcd.o(.text.glcd_inicializar) for glcd_inicializar
-    main.o(.text.main) refers to jugador.o(.text.jugador_actualizar) for jugador_actualizar
-    main.o(.text.main) refers to main.o(.text.jugador_dibujar) for jugador_dibujar
+    main.o(.text.main) refers to jugador.o(.text.dibujar_panel) for dibujar_panel
+    main.o(.text.main) refers to jugador.o(.text.juego_actualizar) for juego_actualizar
+    main.o(.text.main) refers to jugador.o(.text.juego_dibujar) for juego_dibujar
     main.o(.text.main) refers to timer_lpc40xx.o(.text.timer_retardo_ms) for timer_retardo_ms
-    main.o(.text.main) refers to main.o(.text.jugador_borrar) for jugador_borrar
+    main.o(.text.main) refers to jugador.o(.text.juego_borrar) for juego_borrar
     main.o(.ARM.exidx.text.main) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
-    main.o(.text.jugador_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
-    main.o(.text.jugador_dibujar) refers to sprites.o(.text.dibujar_sprite) for dibujar_sprite
-    main.o(.ARM.exidx.text.jugador_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
-    main.o(.ARM.exidx.text.jugador_dibujar) refers to main.o(.text.jugador_dibujar) for [Anonymous Symbol]
-    main.o(.text.jugador_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
-    main.o(.text.jugador_borrar) refers to sprites.o(.text.dibujar_sprite) for dibujar_sprite
-    main.o(.ARM.exidx.text.jugador_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
-    main.o(.ARM.exidx.text.jugador_borrar) refers to main.o(.text.jugador_borrar) for [Anonymous Symbol]
     main.o(.ARM.use_no_argv) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     nunchuk.o(.text.nunchuk_inicializar) refers to i2c_lpc40xx.o(.text.i2c_inicializar) for i2c_inicializar
     nunchuk.o(.text.nunchuk_inicializar) refers to timer_lpc40xx.o(.text.timer_inicializar) for timer_inicializar
@@ -55,9 +48,59 @@ Section Cross References
     jugador.o(.text.jugador_actualizar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     jugador.o(.ARM.exidx.text.jugador_actualizar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     jugador.o(.ARM.exidx.text.jugador_actualizar) refers to jugador.o(.text.jugador_actualizar) for [Anonymous Symbol]
+    jugador.o(.text.enemigo_crear) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.enemigo_crear) refers to jugador.o(.data.sprite_enemigo_a) for sprite_enemigo_a
+    jugador.o(.text.enemigo_crear) refers to jugador.o(.data.sprite_enemigo_b) for sprite_enemigo_b
+    jugador.o(.ARM.exidx.text.enemigo_crear) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.enemigo_crear) refers to jugador.o(.text.enemigo_crear) for [Anonymous Symbol]
+    jugador.o(.text.juego_inicializar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.juego_inicializar) refers to jugador.o(.text.jugador_crear) for jugador_crear
+    jugador.o(.text.juego_inicializar) refers to jugador.o(.bss.enemigos) for enemigos
+    jugador.o(.text.juego_inicializar) refers to jugador.o(.text.enemigo_crear) for enemigo_crear
+    jugador.o(.ARM.exidx.text.juego_inicializar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.juego_inicializar) refers to jugador.o(.text.juego_inicializar) for [Anonymous Symbol]
+    jugador.o(.text.juego_actualizar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.juego_actualizar) refers to jugador.o(.text.jugador_actualizar) for jugador_actualizar
+    jugador.o(.ARM.exidx.text.juego_actualizar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.juego_actualizar) refers to jugador.o(.text.juego_actualizar) for [Anonymous Symbol]
+    jugador.o(.text.juego_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.juego_dibujar) refers to jugador.o(.text.jugador_dibujar) for jugador_dibujar
+    jugador.o(.text.juego_dibujar) refers to jugador.o(.bss.enemigos) for enemigos
+    jugador.o(.text.juego_dibujar) refers to jugador.o(.text.enemigo_dibujar) for enemigo_dibujar
+    jugador.o(.ARM.exidx.text.juego_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.juego_dibujar) refers to jugador.o(.text.juego_dibujar) for [Anonymous Symbol]
+    jugador.o(.text.jugador_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.jugador_dibujar) refers to sprites.o(.text.dibujar_sprite) for dibujar_sprite
+    jugador.o(.ARM.exidx.text.jugador_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.jugador_dibujar) refers to jugador.o(.text.jugador_dibujar) for [Anonymous Symbol]
+    jugador.o(.text.enemigo_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.enemigo_dibujar) refers to sprites.o(.text.dibujar_sprite) for dibujar_sprite
+    jugador.o(.ARM.exidx.text.enemigo_dibujar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.enemigo_dibujar) refers to jugador.o(.text.enemigo_dibujar) for [Anonymous Symbol]
+    jugador.o(.text.juego_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.juego_borrar) refers to jugador.o(.text.jugador_borrar) for jugador_borrar
+    jugador.o(.text.juego_borrar) refers to jugador.o(.bss.enemigos) for enemigos
+    jugador.o(.text.juego_borrar) refers to jugador.o(.text.enemigo_borrar) for enemigo_borrar
+    jugador.o(.ARM.exidx.text.juego_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.juego_borrar) refers to jugador.o(.text.juego_borrar) for [Anonymous Symbol]
+    jugador.o(.text.jugador_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.jugador_borrar) refers to sprites.o(.text.dibujar_sprite) for dibujar_sprite
+    jugador.o(.ARM.exidx.text.jugador_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.jugador_borrar) refers to jugador.o(.text.jugador_borrar) for [Anonymous Symbol]
+    jugador.o(.text.enemigo_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.enemigo_borrar) refers to sprites.o(.text.dibujar_sprite) for dibujar_sprite
+    jugador.o(.ARM.exidx.text.enemigo_borrar) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.enemigo_borrar) refers to jugador.o(.text.enemigo_borrar) for [Anonymous Symbol]
+    jugador.o(.text.dibujar_panel) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.text.dibujar_panel) refers to glcd.o(.text.glcd_rectangulo_relleno) for glcd_rectangulo_relleno
+    jugador.o(.ARM.exidx.text.dibujar_panel) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.ARM.exidx.text.dibujar_panel) refers to jugador.o(.text.dibujar_panel) for [Anonymous Symbol]
     jugador.o(.data.sprite_jugador) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     jugador.o(.rodata..L__const.jugador_crear.ret) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     jugador.o(.rodata..L__const.jugador_crear.ret) refers to jugador.o(.data.sprite_jugador) for sprite_jugador
+    jugador.o(.data.sprite_enemigo_a) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.data.sprite_enemigo_b) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
+    jugador.o(.bss.enemigos) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     startup_lpc407x_8x_177x_8x.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_lpc407x_8x_177x_8x.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_lpc407x_8x_177x_8x.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -641,8 +684,6 @@ Removing Unused input sections from the image.
 
     Removing main.o(.text), (0 bytes).
     Removing main.o(.ARM.exidx.text.main), (8 bytes).
-    Removing main.o(.ARM.exidx.text.jugador_dibujar), (8 bytes).
-    Removing main.o(.ARM.exidx.text.jugador_borrar), (8 bytes).
     Removing main.o(.ARM.use_no_argv), (4 bytes).
     Removing nunchuk.o(.text), (0 bytes).
     Removing nunchuk.o(.ARM.exidx.text.nunchuk_inicializar), (8 bytes).
@@ -653,6 +694,16 @@ Removing Unused input sections from the image.
     Removing jugador.o(.text), (0 bytes).
     Removing jugador.o(.ARM.exidx.text.jugador_crear), (8 bytes).
     Removing jugador.o(.ARM.exidx.text.jugador_actualizar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.enemigo_crear), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.juego_inicializar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.juego_actualizar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.juego_dibujar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.jugador_dibujar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.enemigo_dibujar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.juego_borrar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.jugador_borrar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.enemigo_borrar), (8 bytes).
+    Removing jugador.o(.ARM.exidx.text.dibujar_panel), (8 bytes).
     Removing system_lpc407x_8x_177x_8x.o(.text), (0 bytes).
     Removing system_lpc407x_8x_177x_8x.o(.ARM.exidx.text.SystemCoreClockUpdate), (8 bytes).
     Removing system_lpc407x_8x_177x_8x.o(.ARM.exidx.text.fpu_init), (8 bytes).
@@ -735,7 +786,7 @@ Removing Unused input sections from the image.
     Removing iocon_lpc40xx.o(.text.iocon_configurar_grupo_pines), (128 bytes).
     Removing iocon_lpc40xx.o(.ARM.exidx.text.iocon_configurar_grupo_pines), (8 bytes).
 
-95 unused section(s) (total 3022 bytes) removed from the image.
+103 unused section(s) (total 3086 bytes) removed from the image.
 
 ==============================================================================
 
@@ -977,93 +1028,103 @@ Image Symbol Table
     [Anonymous Symbol]                       0x000011b4   Section        0  system_lpc407x_8x_177x_8x.o(.text._DelayMs)
     [Anonymous Symbol]                       0x000011f4   Section        0  glcd.o(.text._sys_exit)
     [Anonymous Symbol]                       0x00001210   Section        0  sdram.o(.text.adjust_timing)
-    dibujar_pixel                            0x00001289   Thumb Code    52  sprites.o(.text.dibujar_pixel)
-    [Anonymous Symbol]                       0x00001288   Section        0  sprites.o(.text.dibujar_pixel)
-    [Anonymous Symbol]                       0x000012bc   Section        0  sprites.o(.text.dibujar_sprite)
-    [Anonymous Symbol]                       0x0000133c   Section        0  glcd.o(.text.ferror)
-    [Anonymous Symbol]                       0x0000134c   Section        0  system_lpc407x_8x_177x_8x.o(.text.fpu_init)
-    [Anonymous Symbol]                       0x000013d0   Section        0  glcd.o(.text.fputc)
-    [Anonymous Symbol]                       0x00001574   Section        0  glcd.o(.text.glcd_borrar)
-    [Anonymous Symbol]                       0x0000158c   Section        0  glcd.o(.text.glcd_caracter)
-    [Anonymous Symbol]                       0x0000167c   Section        0  glcd.o(.text.glcd_color_texto)
-    [Anonymous Symbol]                       0x00001688   Section        0  glcd.o(.text.glcd_fondo_texto)
-    glcd_i2c0_transmitir_buffer              0x00001695   Thumb Code   116  glcd.o(.text.glcd_i2c0_transmitir_buffer)
-    [Anonymous Symbol]                       0x00001694   Section        0  glcd.o(.text.glcd_i2c0_transmitir_buffer)
-    [Anonymous Symbol]                       0x00001708   Section        0  glcd.o(.text.glcd_inicializar)
-    [Anonymous Symbol]                       0x000019e4   Section        0  glcd.o(.text.glcd_rectangulo_relleno)
-    [Anonymous Symbol]                       0x00001a68   Section        0  glcd.o(.text.glcd_seleccionar_fuente)
-    [Anonymous Symbol]                       0x00001ab0   Section        0  glcd.o(.text.glcd_xy_texto)
-    [Anonymous Symbol]                       0x00001ad4   Section        0  i2c_lpc40xx.o(.text.i2c_inicializar)
-    [Anonymous Symbol]                       0x00001c14   Section        0  i2c_lpc40xx.o(.text.i2c_recibir_byte)
-    [Anonymous Symbol]                       0x00001c88   Section        0  i2c_lpc40xx.o(.text.i2c_start)
-    [Anonymous Symbol]                       0x00001cdc   Section        0  i2c_lpc40xx.o(.text.i2c_stop)
-    [Anonymous Symbol]                       0x00001d38   Section        0  i2c_lpc40xx.o(.text.i2c_transmitir_byte)
-    [Anonymous Symbol]                       0x00001db4   Section        0  iocon_lpc40xx.o(.text.iocon_configurar_pin)
-    [Anonymous Symbol]                       0x00001f3c   Section        0  jugador.o(.text.jugador_actualizar)
-    jugador_borrar                           0x00001fe5   Thumb Code    24  main.o(.text.jugador_borrar)
-    [Anonymous Symbol]                       0x00001fe4   Section        0  main.o(.text.jugador_borrar)
-    [Anonymous Symbol]                       0x00001ffc   Section        0  jugador.o(.text.jugador_crear)
-    jugador_dibujar                          0x00002011   Thumb Code    26  main.o(.text.jugador_dibujar)
-    [Anonymous Symbol]                       0x00002010   Section        0  main.o(.text.jugador_dibujar)
-    [Anonymous Symbol]                       0x0000202c   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x00002080   Section        0  nunchuk.o(.text.nunchuk_inicializar)
-    [Anonymous Symbol]                       0x00002194   Section        0  nunchuk.o(.text.nunchuk_leer)
-    [Anonymous Symbol]                       0x00002264   Section        0  error.o(.text.parar_con_error)
-    [Anonymous Symbol]                       0x00002324   Section        0  sdram.o(.text.sdram_inicializar)
-    sdram_test                               0x00002865   Thumb Code   108  sdram.o(.text.sdram_test)
-    [Anonymous Symbol]                       0x00002864   Section        0  sdram.o(.text.sdram_test)
-    [Anonymous Symbol]                       0x000028d0   Section        0  timer_lpc40xx.o(.text.timer_inicializar)
-    [Anonymous Symbol]                       0x00002974   Section        0  timer_lpc40xx.o(.text.timer_retardo_ms)
-    [Anonymous Symbol]                       0x00002a24   Section        0  timer_lpc40xx.o(.text.timer_retardo_us)
-    i._is_digit                              0x00002ad4   Section        0  __printf_wp.o(i._is_digit)
-    $v0                                      0x00002ae2   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x00002ae2   Section       26  fpinit.o(x$fpl$fpinit)
-    maptable                                 0x00002afc   Data          17  __printf_flags_ss_wp.o(.constdata)
-    .constdata                               0x00002afc   Section       17  __printf_flags_ss_wp.o(.constdata)
-    [Anonymous Symbol]                       0x00009b4c   Section        0  timer_lpc40xx.o(.rodata.str1.1)
-    .L.str                                   0x00009b66   Data          16  timer_lpc40xx.o(.rodata.str1.1)
-    .L__FUNCTION__.timer_iniciar_ciclos_ms   0x00009b72   Data          24  timer_lpc40xx.o(.rodata.str1.1)
-    .L.str.2                                 0x00009b8a   Data          26  timer_lpc40xx.o(.rodata.str1.1)
-    .L.str.1                                 0x00009b8e   Data          22  timer_lpc40xx.o(.rodata.str1.1)
-    .L__FUNCTION__.timer_iniciar_ciclos_us   0x00009ba4   Data          24  timer_lpc40xx.o(.rodata.str1.1)
-    .L__FUNCTION__.timer_esperar_fin_ciclo   0x00009bbc   Data          24  timer_lpc40xx.o(.rodata.str1.1)
-    .L.str.1                                 0x00009bd4   Data          19  glcd.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x00009bd4   Section        0  glcd.o(.rodata.str1.1)
-    .L.str                                   0x00009be7   Data           7  glcd.o(.rodata.str1.1)
-    .L__FUNCTION__.glcd_texto                0x00009bee   Data          11  glcd.o(.rodata.str1.1)
-    .L.str.1                                 0x00009bf9   Data          35  i2c_lpc40xx.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x00009bf9   Section        0  i2c_lpc40xx.o(.rodata.str1.1)
-    .L.str                                   0x00009c1c   Data          14  i2c_lpc40xx.o(.rodata.str1.1)
-    .L__FUNCTION__.i2c_inicializar           0x00009c2a   Data          16  i2c_lpc40xx.o(.rodata.str1.1)
-    .L.str.5                                 0x00009c3a   Data          37  iocon_lpc40xx.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x00009c3a   Section        0  iocon_lpc40xx.o(.rodata.str1.1)
-    .L.str.3                                 0x00009c5f   Data          57  iocon_lpc40xx.o(.rodata.str1.1)
-    .L.str                                   0x00009c98   Data          16  iocon_lpc40xx.o(.rodata.str1.1)
-    .L__FUNCTION__.iocon_configurar_pin      0x00009ca8   Data          21  iocon_lpc40xx.o(.rodata.str1.1)
-    tabla_fuentes                            0x00009cc0   Data          12  glcd.o(.rodata.tabla_fuentes)
-    [Anonymous Symbol]                       0x00009cc0   Section        0  glcd.o(.rodata.tabla_fuentes)
-    tabla_funciones_pines                    0x00009ccc   Data        3072  iocon_lpc40xx.o(.rodata.tabla_funciones_pines)
-    [Anonymous Symbol]                       0x00009ccc   Section        0  iocon_lpc40xx.o(.rodata.tabla_funciones_pines)
+    [Anonymous Symbol]                       0x00001288   Section        0  jugador.o(.text.dibujar_panel)
+    dibujar_pixel                            0x000012a9   Thumb Code    52  sprites.o(.text.dibujar_pixel)
+    [Anonymous Symbol]                       0x000012a8   Section        0  sprites.o(.text.dibujar_pixel)
+    [Anonymous Symbol]                       0x000012dc   Section        0  sprites.o(.text.dibujar_sprite)
+    enemigo_borrar                           0x0000135d   Thumb Code    34  jugador.o(.text.enemigo_borrar)
+    [Anonymous Symbol]                       0x0000135c   Section        0  jugador.o(.text.enemigo_borrar)
+    [Anonymous Symbol]                       0x00001380   Section        0  jugador.o(.text.enemigo_crear)
+    enemigo_dibujar                          0x000013b1   Thumb Code    36  jugador.o(.text.enemigo_dibujar)
+    [Anonymous Symbol]                       0x000013b0   Section        0  jugador.o(.text.enemigo_dibujar)
+    [Anonymous Symbol]                       0x000013d4   Section        0  glcd.o(.text.ferror)
+    [Anonymous Symbol]                       0x000013e4   Section        0  system_lpc407x_8x_177x_8x.o(.text.fpu_init)
+    [Anonymous Symbol]                       0x00001468   Section        0  glcd.o(.text.fputc)
+    [Anonymous Symbol]                       0x0000160c   Section        0  glcd.o(.text.glcd_borrar)
+    [Anonymous Symbol]                       0x00001624   Section        0  glcd.o(.text.glcd_caracter)
+    [Anonymous Symbol]                       0x00001714   Section        0  glcd.o(.text.glcd_color_texto)
+    [Anonymous Symbol]                       0x00001720   Section        0  glcd.o(.text.glcd_fondo_texto)
+    glcd_i2c0_transmitir_buffer              0x0000172d   Thumb Code   116  glcd.o(.text.glcd_i2c0_transmitir_buffer)
+    [Anonymous Symbol]                       0x0000172c   Section        0  glcd.o(.text.glcd_i2c0_transmitir_buffer)
+    [Anonymous Symbol]                       0x000017a0   Section        0  glcd.o(.text.glcd_inicializar)
+    [Anonymous Symbol]                       0x00001a7c   Section        0  glcd.o(.text.glcd_rectangulo_relleno)
+    [Anonymous Symbol]                       0x00001b00   Section        0  glcd.o(.text.glcd_seleccionar_fuente)
+    [Anonymous Symbol]                       0x00001b48   Section        0  glcd.o(.text.glcd_xy_texto)
+    [Anonymous Symbol]                       0x00001b6c   Section        0  i2c_lpc40xx.o(.text.i2c_inicializar)
+    [Anonymous Symbol]                       0x00001cac   Section        0  i2c_lpc40xx.o(.text.i2c_recibir_byte)
+    [Anonymous Symbol]                       0x00001d20   Section        0  i2c_lpc40xx.o(.text.i2c_start)
+    [Anonymous Symbol]                       0x00001d74   Section        0  i2c_lpc40xx.o(.text.i2c_stop)
+    [Anonymous Symbol]                       0x00001dd0   Section        0  i2c_lpc40xx.o(.text.i2c_transmitir_byte)
+    [Anonymous Symbol]                       0x00001e4c   Section        0  iocon_lpc40xx.o(.text.iocon_configurar_pin)
+    [Anonymous Symbol]                       0x00001fd4   Section        0  jugador.o(.text.juego_actualizar)
+    [Anonymous Symbol]                       0x00001fe8   Section        0  jugador.o(.text.juego_borrar)
+    [Anonymous Symbol]                       0x00002034   Section        0  jugador.o(.text.juego_dibujar)
+    [Anonymous Symbol]                       0x00002080   Section        0  jugador.o(.text.juego_inicializar)
+    [Anonymous Symbol]                       0x00002104   Section        0  jugador.o(.text.jugador_actualizar)
+    jugador_borrar                           0x000021ad   Thumb Code    24  jugador.o(.text.jugador_borrar)
+    [Anonymous Symbol]                       0x000021ac   Section        0  jugador.o(.text.jugador_borrar)
+    [Anonymous Symbol]                       0x000021c4   Section        0  jugador.o(.text.jugador_crear)
+    jugador_dibujar                          0x000021d9   Thumb Code    26  jugador.o(.text.jugador_dibujar)
+    [Anonymous Symbol]                       0x000021d8   Section        0  jugador.o(.text.jugador_dibujar)
+    [Anonymous Symbol]                       0x000021f4   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x0000224c   Section        0  nunchuk.o(.text.nunchuk_inicializar)
+    [Anonymous Symbol]                       0x00002360   Section        0  nunchuk.o(.text.nunchuk_leer)
+    [Anonymous Symbol]                       0x00002430   Section        0  error.o(.text.parar_con_error)
+    [Anonymous Symbol]                       0x000024f0   Section        0  sdram.o(.text.sdram_inicializar)
+    sdram_test                               0x00002a31   Thumb Code   108  sdram.o(.text.sdram_test)
+    [Anonymous Symbol]                       0x00002a30   Section        0  sdram.o(.text.sdram_test)
+    [Anonymous Symbol]                       0x00002a9c   Section        0  timer_lpc40xx.o(.text.timer_inicializar)
+    [Anonymous Symbol]                       0x00002b40   Section        0  timer_lpc40xx.o(.text.timer_retardo_ms)
+    [Anonymous Symbol]                       0x00002bf0   Section        0  timer_lpc40xx.o(.text.timer_retardo_us)
+    i._is_digit                              0x00002ca0   Section        0  __printf_wp.o(i._is_digit)
+    $v0                                      0x00002cae   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x00002cae   Section       26  fpinit.o(x$fpl$fpinit)
+    maptable                                 0x00002cc8   Data          17  __printf_flags_ss_wp.o(.constdata)
+    .constdata                               0x00002cc8   Section       17  __printf_flags_ss_wp.o(.constdata)
+    [Anonymous Symbol]                       0x00009d18   Section        0  timer_lpc40xx.o(.rodata.str1.1)
+    .L.str                                   0x00009d32   Data          16  timer_lpc40xx.o(.rodata.str1.1)
+    .L__FUNCTION__.timer_iniciar_ciclos_ms   0x00009d3e   Data          24  timer_lpc40xx.o(.rodata.str1.1)
+    .L.str.2                                 0x00009d56   Data          26  timer_lpc40xx.o(.rodata.str1.1)
+    .L.str.1                                 0x00009d5a   Data          22  timer_lpc40xx.o(.rodata.str1.1)
+    .L__FUNCTION__.timer_iniciar_ciclos_us   0x00009d70   Data          24  timer_lpc40xx.o(.rodata.str1.1)
+    .L__FUNCTION__.timer_esperar_fin_ciclo   0x00009d88   Data          24  timer_lpc40xx.o(.rodata.str1.1)
+    .L.str.1                                 0x00009da0   Data          19  glcd.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x00009da0   Section        0  glcd.o(.rodata.str1.1)
+    .L.str                                   0x00009db3   Data           7  glcd.o(.rodata.str1.1)
+    .L__FUNCTION__.glcd_texto                0x00009dba   Data          11  glcd.o(.rodata.str1.1)
+    .L.str.1                                 0x00009dc5   Data          35  i2c_lpc40xx.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x00009dc5   Section        0  i2c_lpc40xx.o(.rodata.str1.1)
+    .L.str                                   0x00009de8   Data          14  i2c_lpc40xx.o(.rodata.str1.1)
+    .L__FUNCTION__.i2c_inicializar           0x00009df6   Data          16  i2c_lpc40xx.o(.rodata.str1.1)
+    .L.str.5                                 0x00009e06   Data          37  iocon_lpc40xx.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x00009e06   Section        0  iocon_lpc40xx.o(.rodata.str1.1)
+    .L.str.3                                 0x00009e2b   Data          57  iocon_lpc40xx.o(.rodata.str1.1)
+    .L.str                                   0x00009e64   Data          16  iocon_lpc40xx.o(.rodata.str1.1)
+    .L__FUNCTION__.iocon_configurar_pin      0x00009e74   Data          21  iocon_lpc40xx.o(.rodata.str1.1)
+    tabla_fuentes                            0x00009e8c   Data          12  glcd.o(.rodata.tabla_fuentes)
+    [Anonymous Symbol]                       0x00009e8c   Section        0  glcd.o(.rodata.tabla_fuentes)
+    tabla_funciones_pines                    0x00009e98   Data        3072  iocon_lpc40xx.o(.rodata.tabla_funciones_pines)
+    [Anonymous Symbol]                       0x00009e98   Section        0  iocon_lpc40xx.o(.rodata.tabla_funciones_pines)
     color_texto_actual                       0x10000010   Data           2  glcd.o(.data.color_texto_actual)
     [Anonymous Symbol]                       0x10000010   Section        0  glcd.o(.data.color_texto_actual)
     desplazamiento_activado                  0x10000012   Data           1  glcd.o(.data.desplazamiento_activado)
     [Anonymous Symbol]                       0x10000012   Section        0  glcd.o(.data.desplazamiento_activado)
     fuente_actual                            0x10000014   Data           4  glcd.o(.data.fuente_actual)
     [Anonymous Symbol]                       0x10000014   Section        0  glcd.o(.data.fuente_actual)
-    .bss                                     0x10000020   Section       96  libspace.o(.bss)
-    color_fondo_texto_actual                 0x10000084   Data           2  glcd.o(.bss.color_fondo_texto_actual)
-    [Anonymous Symbol]                       0x10000084   Section        0  glcd.o(.bss.color_fondo_texto_actual)
-    ringosccount                             0x10000088   Data           8  sdram.o(.bss.ringosccount)
-    [Anonymous Symbol]                       0x10000088   Section        0  sdram.o(.bss.ringosccount)
-    x_texto_actual                           0x10000090   Data           4  glcd.o(.bss.x_texto_actual)
-    [Anonymous Symbol]                       0x10000090   Section        0  glcd.o(.bss.x_texto_actual)
-    y_texto_actual                           0x10000094   Data           4  glcd.o(.bss.y_texto_actual)
-    [Anonymous Symbol]                       0x10000094   Section        0  glcd.o(.bss.y_texto_actual)
-    Heap_Mem                                 0x10000098   Data           0  startup_lpc407x_8x_177x_8x.o(HEAP)
-    Stack_Mem                                0x10000098   Data        1024  startup_lpc407x_8x_177x_8x.o(STACK)
-    HEAP                                     0x10000098   Section        0  startup_lpc407x_8x_177x_8x.o(HEAP)
-    STACK                                    0x10000098   Section     1024  startup_lpc407x_8x_177x_8x.o(STACK)
-    __initial_sp                             0x10000498   Data           0  startup_lpc407x_8x_177x_8x.o(STACK)
+    .bss                                     0x10000030   Section       96  libspace.o(.bss)
+    color_fondo_texto_actual                 0x10000094   Data           2  glcd.o(.bss.color_fondo_texto_actual)
+    [Anonymous Symbol]                       0x10000094   Section        0  glcd.o(.bss.color_fondo_texto_actual)
+    ringosccount                             0x10000188   Data           8  sdram.o(.bss.ringosccount)
+    [Anonymous Symbol]                       0x10000188   Section        0  sdram.o(.bss.ringosccount)
+    x_texto_actual                           0x10000190   Data           4  glcd.o(.bss.x_texto_actual)
+    [Anonymous Symbol]                       0x10000190   Section        0  glcd.o(.bss.x_texto_actual)
+    y_texto_actual                           0x10000194   Data           4  glcd.o(.bss.y_texto_actual)
+    [Anonymous Symbol]                       0x10000194   Section        0  glcd.o(.bss.y_texto_actual)
+    Heap_Mem                                 0x10000198   Data           0  startup_lpc407x_8x_177x_8x.o(HEAP)
+    Stack_Mem                                0x10000198   Data        1024  startup_lpc407x_8x_177x_8x.o(STACK)
+    HEAP                                     0x10000198   Section        0  startup_lpc407x_8x_177x_8x.o(HEAP)
+    STACK                                    0x10000198   Section     1024  startup_lpc407x_8x_177x_8x.o(STACK)
+    __initial_sp                             0x10000598   Data           0  startup_lpc407x_8x_177x_8x.o(STACK)
 
     Global Symbols
 
@@ -1243,54 +1304,63 @@ Image Symbol Table
     SystemInit_ExtMemCtl                     0x00000d99   Thumb Code  1050  system_lpc407x_8x_177x_8x.o(.text.SystemInit_ExtMemCtl)
     _sys_exit                                0x000011f5   Thumb Code    26  glcd.o(.text._sys_exit)
     adjust_timing                            0x00001211   Thumb Code   120  sdram.o(.text.adjust_timing)
-    dibujar_sprite                           0x000012bd   Thumb Code   128  sprites.o(.text.dibujar_sprite)
-    ferror                                   0x0000133d   Thumb Code    16  glcd.o(.text.ferror)
-    fpu_init                                 0x0000134d   Thumb Code   132  system_lpc407x_8x_177x_8x.o(.text.fpu_init)
-    fputc                                    0x000013d1   Thumb Code   418  glcd.o(.text.fputc)
-    glcd_borrar                              0x00001575   Thumb Code    22  glcd.o(.text.glcd_borrar)
-    glcd_caracter                            0x0000158d   Thumb Code   224  glcd.o(.text.glcd_caracter)
-    glcd_color_texto                         0x0000167d   Thumb Code    12  glcd.o(.text.glcd_color_texto)
-    glcd_fondo_texto                         0x00001689   Thumb Code    12  glcd.o(.text.glcd_fondo_texto)
-    glcd_inicializar                         0x00001709   Thumb Code   732  glcd.o(.text.glcd_inicializar)
-    glcd_rectangulo_relleno                  0x000019e5   Thumb Code   132  glcd.o(.text.glcd_rectangulo_relleno)
-    glcd_seleccionar_fuente                  0x00001a69   Thumb Code    48  glcd.o(.text.glcd_seleccionar_fuente)
-    glcd_xy_texto                            0x00001ab1   Thumb Code    36  glcd.o(.text.glcd_xy_texto)
-    i2c_inicializar                          0x00001ad5   Thumb Code   268  i2c_lpc40xx.o(.text.i2c_inicializar)
-    i2c_recibir_byte                         0x00001c15   Thumb Code    96  i2c_lpc40xx.o(.text.i2c_recibir_byte)
-    i2c_start                                0x00001c89   Thumb Code    72  i2c_lpc40xx.o(.text.i2c_start)
-    i2c_stop                                 0x00001cdd   Thumb Code    80  i2c_lpc40xx.o(.text.i2c_stop)
-    i2c_transmitir_byte                      0x00001d39   Thumb Code   104  i2c_lpc40xx.o(.text.i2c_transmitir_byte)
-    iocon_configurar_pin                     0x00001db5   Thumb Code   264  iocon_lpc40xx.o(.text.iocon_configurar_pin)
-    jugador_actualizar                       0x00001f3d   Thumb Code   166  jugador.o(.text.jugador_actualizar)
-    jugador_crear                            0x00001ffd   Thumb Code    20  jugador.o(.text.jugador_crear)
-    main                                     0x0000202d   Thumb Code    82  main.o(.text.main)
-    nunchuk_inicializar                      0x00002081   Thumb Code   276  nunchuk.o(.text.nunchuk_inicializar)
-    nunchuk_leer                             0x00002195   Thumb Code   208  nunchuk.o(.text.nunchuk_leer)
-    parar_con_error                          0x00002265   Thumb Code   136  error.o(.text.parar_con_error)
-    sdram_inicializar                        0x00002325   Thumb Code  1342  sdram.o(.text.sdram_inicializar)
-    timer_inicializar                        0x000028d1   Thumb Code   144  timer_lpc40xx.o(.text.timer_inicializar)
-    timer_retardo_ms                         0x00002975   Thumb Code   156  timer_lpc40xx.o(.text.timer_retardo_ms)
-    timer_retardo_us                         0x00002a25   Thumb Code   156  timer_lpc40xx.o(.text.timer_retardo_us)
-    _is_digit                                0x00002ad5   Thumb Code    14  __printf_wp.o(i._is_digit)
-    _fp_init                                 0x00002ae3   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x00002afb   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x00002afb   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    fuente_12x24                             0x00002b10   Data          20  fuente_12x24.o(.rodata.fuente_12x24)
-    fuente_12x24_datos                       0x00002b24   Data       10752  fuente_12x24.o(.rodata.fuente_12x24_datos)
-    fuente_16x32                             0x00005524   Data          20  fuente_16x32.o(.rodata.fuente_16x32)
-    fuente_16x32_datos                       0x00005538   Data       14336  fuente_16x32.o(.rodata.fuente_16x32_datos)
-    fuente_8x16                              0x00008d38   Data          20  fuente_8x16.o(.rodata.fuente_8x16)
-    fuente_8x16_datos                        0x00008d4c   Data        3584  fuente_8x16.o(.rodata.fuente_8x16_datos)
-    Region$$Table$$Base                      0x0000a8cc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0000a8ec   Number         0  anon$$obj.o(Region$$Table)
+    dibujar_panel                            0x00001289   Thumb Code    32  jugador.o(.text.dibujar_panel)
+    dibujar_sprite                           0x000012dd   Thumb Code   128  sprites.o(.text.dibujar_sprite)
+    enemigo_crear                            0x00001381   Thumb Code    48  jugador.o(.text.enemigo_crear)
+    ferror                                   0x000013d5   Thumb Code    16  glcd.o(.text.ferror)
+    fpu_init                                 0x000013e5   Thumb Code   132  system_lpc407x_8x_177x_8x.o(.text.fpu_init)
+    fputc                                    0x00001469   Thumb Code   418  glcd.o(.text.fputc)
+    glcd_borrar                              0x0000160d   Thumb Code    22  glcd.o(.text.glcd_borrar)
+    glcd_caracter                            0x00001625   Thumb Code   224  glcd.o(.text.glcd_caracter)
+    glcd_color_texto                         0x00001715   Thumb Code    12  glcd.o(.text.glcd_color_texto)
+    glcd_fondo_texto                         0x00001721   Thumb Code    12  glcd.o(.text.glcd_fondo_texto)
+    glcd_inicializar                         0x000017a1   Thumb Code   732  glcd.o(.text.glcd_inicializar)
+    glcd_rectangulo_relleno                  0x00001a7d   Thumb Code   132  glcd.o(.text.glcd_rectangulo_relleno)
+    glcd_seleccionar_fuente                  0x00001b01   Thumb Code    48  glcd.o(.text.glcd_seleccionar_fuente)
+    glcd_xy_texto                            0x00001b49   Thumb Code    36  glcd.o(.text.glcd_xy_texto)
+    i2c_inicializar                          0x00001b6d   Thumb Code   268  i2c_lpc40xx.o(.text.i2c_inicializar)
+    i2c_recibir_byte                         0x00001cad   Thumb Code    96  i2c_lpc40xx.o(.text.i2c_recibir_byte)
+    i2c_start                                0x00001d21   Thumb Code    72  i2c_lpc40xx.o(.text.i2c_start)
+    i2c_stop                                 0x00001d75   Thumb Code    80  i2c_lpc40xx.o(.text.i2c_stop)
+    i2c_transmitir_byte                      0x00001dd1   Thumb Code   104  i2c_lpc40xx.o(.text.i2c_transmitir_byte)
+    iocon_configurar_pin                     0x00001e4d   Thumb Code   264  iocon_lpc40xx.o(.text.iocon_configurar_pin)
+    juego_actualizar                         0x00001fd5   Thumb Code    20  jugador.o(.text.juego_actualizar)
+    juego_borrar                             0x00001fe9   Thumb Code    76  jugador.o(.text.juego_borrar)
+    juego_dibujar                            0x00002035   Thumb Code    76  jugador.o(.text.juego_dibujar)
+    juego_inicializar                        0x00002081   Thumb Code   130  jugador.o(.text.juego_inicializar)
+    jugador_actualizar                       0x00002105   Thumb Code   168  jugador.o(.text.jugador_actualizar)
+    jugador_crear                            0x000021c5   Thumb Code    20  jugador.o(.text.jugador_crear)
+    main                                     0x000021f5   Thumb Code    86  main.o(.text.main)
+    nunchuk_inicializar                      0x0000224d   Thumb Code   276  nunchuk.o(.text.nunchuk_inicializar)
+    nunchuk_leer                             0x00002361   Thumb Code   208  nunchuk.o(.text.nunchuk_leer)
+    parar_con_error                          0x00002431   Thumb Code   136  error.o(.text.parar_con_error)
+    sdram_inicializar                        0x000024f1   Thumb Code  1342  sdram.o(.text.sdram_inicializar)
+    timer_inicializar                        0x00002a9d   Thumb Code   144  timer_lpc40xx.o(.text.timer_inicializar)
+    timer_retardo_ms                         0x00002b41   Thumb Code   156  timer_lpc40xx.o(.text.timer_retardo_ms)
+    timer_retardo_us                         0x00002bf1   Thumb Code   156  timer_lpc40xx.o(.text.timer_retardo_us)
+    _is_digit                                0x00002ca1   Thumb Code    14  __printf_wp.o(i._is_digit)
+    _fp_init                                 0x00002caf   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x00002cc7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x00002cc7   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    fuente_12x24                             0x00002cdc   Data          20  fuente_12x24.o(.rodata.fuente_12x24)
+    fuente_12x24_datos                       0x00002cf0   Data       10752  fuente_12x24.o(.rodata.fuente_12x24_datos)
+    fuente_16x32                             0x000056f0   Data          20  fuente_16x32.o(.rodata.fuente_16x32)
+    fuente_16x32_datos                       0x00005704   Data       14336  fuente_16x32.o(.rodata.fuente_16x32_datos)
+    fuente_8x16                              0x00008f04   Data          20  fuente_8x16.o(.rodata.fuente_8x16)
+    fuente_8x16_datos                        0x00008f18   Data        3584  fuente_8x16.o(.rodata.fuente_8x16_datos)
+    Region$$Table$$Base                      0x0000aa98   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0000aab8   Number         0  anon$$obj.o(Region$$Table)
     EMCClock                                 0x10000000   Data           4  system_lpc407x_8x_177x_8x.o(.data.EMCClock)
     PeripheralClock                          0x10000004   Data           4  system_lpc407x_8x_177x_8x.o(.data.PeripheralClock)
     SystemCoreClock                          0x10000008   Data           4  system_lpc407x_8x_177x_8x.o(.data.SystemCoreClock)
     USBClock                                 0x1000000c   Data           4  system_lpc407x_8x_177x_8x.o(.data.USBClock)
-    sprite_jugador                           0x10000018   Data           8  jugador.o(.data.sprite_jugador)
-    __libspace_start                         0x10000020   Data          96  libspace.o(.bss)
-    __stdout                                 0x10000080   Data           4  glcd.o(.bss.__stdout)
-    __temporary_stack_top$libspace           0x10000080   Data           0  libspace.o(.bss)
+    sprite_enemigo_a                         0x10000018   Data           8  jugador.o(.data.sprite_enemigo_a)
+    sprite_enemigo_b                         0x10000020   Data           8  jugador.o(.data.sprite_enemigo_b)
+    sprite_jugador                           0x10000028   Data           8  jugador.o(.data.sprite_jugador)
+    __libspace_start                         0x10000030   Data          96  libspace.o(.bss)
+    __stdout                                 0x10000090   Data           4  glcd.o(.bss.__stdout)
+    __temporary_stack_top$libspace           0x10000090   Data           0  libspace.o(.bss)
+    enemigos                                 0x10000098   Data         240  jugador.o(.bss.enemigos)
 
 
 
@@ -1300,179 +1370,191 @@ Memory Map of the image
 
   Image Entry point : 0x000000e5
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x0000a910, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x0000aae8, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x0000a8ec, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x0000aab8, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x00000000   0x00000000   0x000000e4   Data   RO           53    RESET               startup_lpc407x_8x_177x_8x.o
-    0x000000e4   0x000000e4   0x00000008   Code   RO          302  * !!!main             c_w.l(__main.o)
-    0x000000ec   0x000000ec   0x0000005c   Code   RO          608    !!!scatter          c_w.l(__scatter.o)
-    0x00000148   0x00000148   0x0000001a   Code   RO          612    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000000   0x00000000   0x000000e4   Data   RO           71    RESET               startup_lpc407x_8x_177x_8x.o
+    0x000000e4   0x000000e4   0x00000008   Code   RO          320  * !!!main             c_w.l(__main.o)
+    0x000000ec   0x000000ec   0x0000005c   Code   RO          626    !!!scatter          c_w.l(__scatter.o)
+    0x00000148   0x00000148   0x0000001a   Code   RO          630    !!handler_copy      c_w.l(__scatter_copy.o)
     0x00000162   0x00000162   0x00000002   PAD
-    0x00000164   0x00000164   0x00000002   Code   RO          609    !!handler_null      c_w.l(__scatter.o)
+    0x00000164   0x00000164   0x00000002   Code   RO          627    !!handler_null      c_w.l(__scatter.o)
     0x00000166   0x00000166   0x00000002   PAD
-    0x00000168   0x00000168   0x0000001c   Code   RO          614    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x00000184   0x00000184   0x00000000   Code   RO          297    .ARM.Collect$$_printf_percent$$00000000  c_w.l(_printf_percent.o)
-    0x00000184   0x00000184   0x00000006   Code   RO          296    .ARM.Collect$$_printf_percent$$0000000A  c_w.l(_printf_u.o)
-    0x0000018a   0x0000018a   0x00000006   Code   RO          295    .ARM.Collect$$_printf_percent$$00000014  c_w.l(_printf_s.o)
-    0x00000190   0x00000190   0x00000004   Code   RO          362    .ARM.Collect$$_printf_percent$$00000017  c_w.l(_printf_percent_end.o)
-    0x00000194   0x00000194   0x00000002   Code   RO          462    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x00000196   0x00000196   0x00000004   Code   RO          480    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          483    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          485    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          488    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          490    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          492    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          495    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          497    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          499    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          501    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          503    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          505    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          507    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          509    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          511    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          513    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          515    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          519    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          521    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          523    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000000   Code   RO          525    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
-    0x0000019a   0x0000019a   0x00000002   Code   RO          526    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
-    0x0000019c   0x0000019c   0x00000002   Code   RO          546    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0000019e   0x0000019e   0x00000000   Code   RO          558    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x0000019e   0x0000019e   0x00000000   Code   RO          560    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x0000019e   0x0000019e   0x00000000   Code   RO          563    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x0000019e   0x0000019e   0x00000000   Code   RO          566    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x0000019e   0x0000019e   0x00000000   Code   RO          568    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x0000019e   0x0000019e   0x00000000   Code   RO          571    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x0000019e   0x0000019e   0x00000002   Code   RO          572    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x000001a0   0x000001a0   0x00000000   Code   RO          306    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x000001a0   0x000001a0   0x00000000   Code   RO          383    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x000001a0   0x000001a0   0x00000006   Code   RO          395    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x000001a6   0x000001a6   0x00000000   Code   RO          385    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x000001a6   0x000001a6   0x00000004   Code   RO          386    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x000001aa   0x000001aa   0x00000000   Code   RO          388    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x000001aa   0x000001aa   0x00000008   Code   RO          389    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x000001b2   0x000001b2   0x00000002   Code   RO          471    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x000001b4   0x000001b4   0x00000000   Code   RO          528    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x000001b4   0x000001b4   0x00000004   Code   RO          529    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x000001b8   0x000001b8   0x00000006   Code   RO          530    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x00000168   0x00000168   0x0000001c   Code   RO          632    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x00000184   0x00000184   0x00000000   Code   RO          315    .ARM.Collect$$_printf_percent$$00000000  c_w.l(_printf_percent.o)
+    0x00000184   0x00000184   0x00000006   Code   RO          314    .ARM.Collect$$_printf_percent$$0000000A  c_w.l(_printf_u.o)
+    0x0000018a   0x0000018a   0x00000006   Code   RO          313    .ARM.Collect$$_printf_percent$$00000014  c_w.l(_printf_s.o)
+    0x00000190   0x00000190   0x00000004   Code   RO          380    .ARM.Collect$$_printf_percent$$00000017  c_w.l(_printf_percent_end.o)
+    0x00000194   0x00000194   0x00000002   Code   RO          480    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x00000196   0x00000196   0x00000004   Code   RO          498    .ARM.Collect$$libinit$$00000001  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          501    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          503    .ARM.Collect$$libinit$$00000006  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          506    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          508    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          510    .ARM.Collect$$libinit$$00000010  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          513    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          515    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          517    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          519    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          521    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          523    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          525    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          527    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          529    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          531    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          533    .ARM.Collect$$libinit$$00000027  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          537    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          539    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          541    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000000   Code   RO          543    .ARM.Collect$$libinit$$00000034  c_w.l(libinit2.o)
+    0x0000019a   0x0000019a   0x00000002   Code   RO          544    .ARM.Collect$$libinit$$00000035  c_w.l(libinit2.o)
+    0x0000019c   0x0000019c   0x00000002   Code   RO          564    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0000019e   0x0000019e   0x00000000   Code   RO          576    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x0000019e   0x0000019e   0x00000000   Code   RO          578    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x0000019e   0x0000019e   0x00000000   Code   RO          581    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x0000019e   0x0000019e   0x00000000   Code   RO          584    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x0000019e   0x0000019e   0x00000000   Code   RO          586    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x0000019e   0x0000019e   0x00000000   Code   RO          589    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x0000019e   0x0000019e   0x00000002   Code   RO          590    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x000001a0   0x000001a0   0x00000000   Code   RO          324    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x000001a0   0x000001a0   0x00000000   Code   RO          401    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x000001a0   0x000001a0   0x00000006   Code   RO          413    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x000001a6   0x000001a6   0x00000000   Code   RO          403    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x000001a6   0x000001a6   0x00000004   Code   RO          404    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x000001aa   0x000001aa   0x00000000   Code   RO          406    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x000001aa   0x000001aa   0x00000008   Code   RO          407    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x000001b2   0x000001b2   0x00000002   Code   RO          489    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x000001b4   0x000001b4   0x00000000   Code   RO          546    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x000001b4   0x000001b4   0x00000004   Code   RO          547    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x000001b8   0x000001b8   0x00000006   Code   RO          548    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x000001be   0x000001be   0x00000002   PAD
-    0x000001c0   0x000001c0   0x0000003c   Code   RO           55    .text               startup_lpc407x_8x_177x_8x.o
-    0x000001fc   0x000001fc   0x00000002   Code   RO          261    .text               c_w.l(use_no_semi_2.o)
+    0x000001c0   0x000001c0   0x0000003c   Code   RO           73    .text               startup_lpc407x_8x_177x_8x.o
+    0x000001fc   0x000001fc   0x00000002   Code   RO          279    .text               c_w.l(use_no_semi_2.o)
     0x000001fe   0x000001fe   0x00000002   PAD
-    0x00000200   0x00000200   0x00000018   Code   RO          265    .text               c_w.l(__2printf.o)
-    0x00000218   0x00000218   0x00000052   Code   RO          271    .text               c_w.l(_printf_str.o)
+    0x00000200   0x00000200   0x00000018   Code   RO          283    .text               c_w.l(__2printf.o)
+    0x00000218   0x00000218   0x00000052   Code   RO          289    .text               c_w.l(_printf_str.o)
     0x0000026a   0x0000026a   0x00000002   PAD
-    0x0000026c   0x0000026c   0x00000078   Code   RO          273    .text               c_w.l(_printf_dec.o)
-    0x000002e4   0x000002e4   0x00000006   Code   RO          300    .text               c_w.l(heapauxi.o)
-    0x000002ea   0x000002ea   0x00000002   Code   RO          304    .text               c_w.l(use_no_semi.o)
-    0x000002ec   0x000002ec   0x00000008   Code   RO          468    .text               c_w.l(libspace.o)
-    0x000002f4   0x000002f4   0x00000008   Data   RO           43    .rodata..L__const.jugador_crear.ret  jugador.o
-    0x000002fc   0x000002fc   0x00000004   Code   RO           54    .ARM.__at_0x02FC    startup_lpc407x_8x_177x_8x.o
-    0x00000300   0x00000300   0x00000188   Code   RO          292    .text               c_w.l(__printf_flags_ss_wp.o)
-    0x00000488   0x00000488   0x0000007a   Code   RO          298    .text               c_w.l(rt_memmove_w.o)
-    0x00000502   0x00000502   0x000000b2   Code   RO          311    .text               c_w.l(_printf_intcommon.o)
-    0x000005b4   0x000005b4   0x0000002c   Code   RO          315    .text               c_w.l(_printf_char.o)
-    0x000005e0   0x000005e0   0x00000024   Code   RO          317    .text               c_w.l(_printf_char_file.o)
-    0x00000604   0x00000604   0x00000064   Code   RO          372    .text               c_w.l(rt_memcpy_w.o)
-    0x00000668   0x00000668   0x00000030   Code   RO          406    .text               c_w.l(_printf_char_common.o)
-    0x00000698   0x00000698   0x0000004a   Code   RO          412    .text               c_w.l(sys_stackheap_outer.o)
-    0x000006e2   0x000006e2   0x00000012   Code   RO          455    .text               c_w.l(exit.o)
-    0x000006f4   0x000006f4   0x00000034   Code   RO          200    .text.HardFault_Handler  lpc40xx_base.lib(error.o)
-    0x00000728   0x00000728   0x0000052e   Code   RO           64    .text.SystemCoreClockUpdate  system_lpc407x_8x_177x_8x.o
+    0x0000026c   0x0000026c   0x00000078   Code   RO          291    .text               c_w.l(_printf_dec.o)
+    0x000002e4   0x000002e4   0x00000006   Code   RO          318    .text               c_w.l(heapauxi.o)
+    0x000002ea   0x000002ea   0x00000002   Code   RO          322    .text               c_w.l(use_no_semi.o)
+    0x000002ec   0x000002ec   0x00000008   Code   RO          486    .text               c_w.l(libspace.o)
+    0x000002f4   0x000002f4   0x00000008   Data   RO           58    .rodata..L__const.jugador_crear.ret  jugador.o
+    0x000002fc   0x000002fc   0x00000004   Code   RO           72    .ARM.__at_0x02FC    startup_lpc407x_8x_177x_8x.o
+    0x00000300   0x00000300   0x00000188   Code   RO          310    .text               c_w.l(__printf_flags_ss_wp.o)
+    0x00000488   0x00000488   0x0000007a   Code   RO          316    .text               c_w.l(rt_memmove_w.o)
+    0x00000502   0x00000502   0x000000b2   Code   RO          329    .text               c_w.l(_printf_intcommon.o)
+    0x000005b4   0x000005b4   0x0000002c   Code   RO          333    .text               c_w.l(_printf_char.o)
+    0x000005e0   0x000005e0   0x00000024   Code   RO          335    .text               c_w.l(_printf_char_file.o)
+    0x00000604   0x00000604   0x00000064   Code   RO          390    .text               c_w.l(rt_memcpy_w.o)
+    0x00000668   0x00000668   0x00000030   Code   RO          424    .text               c_w.l(_printf_char_common.o)
+    0x00000698   0x00000698   0x0000004a   Code   RO          430    .text               c_w.l(sys_stackheap_outer.o)
+    0x000006e2   0x000006e2   0x00000012   Code   RO          473    .text               c_w.l(exit.o)
+    0x000006f4   0x000006f4   0x00000034   Code   RO          218    .text.HardFault_Handler  lpc40xx_base.lib(error.o)
+    0x00000728   0x00000728   0x0000052e   Code   RO           82    .text.SystemCoreClockUpdate  system_lpc407x_8x_177x_8x.o
     0x00000c56   0x00000c56   0x00000002   PAD
-    0x00000c58   0x00000c58   0x00000140   Code   RO           72    .text.SystemInit    system_lpc407x_8x_177x_8x.o
-    0x00000d98   0x00000d98   0x0000041a   Code   RO           68    .text.SystemInit_ExtMemCtl  system_lpc407x_8x_177x_8x.o
+    0x00000c58   0x00000c58   0x00000140   Code   RO           90    .text.SystemInit    system_lpc407x_8x_177x_8x.o
+    0x00000d98   0x00000d98   0x0000041a   Code   RO           86    .text.SystemInit_ExtMemCtl  system_lpc407x_8x_177x_8x.o
     0x000011b2   0x000011b2   0x00000002   PAD
-    0x000011b4   0x000011b4   0x00000040   Code   RO           70    .text._DelayMs      system_lpc407x_8x_177x_8x.o
-    0x000011f4   0x000011f4   0x0000001a   Code   RO          132    .text._sys_exit     lpc40xx_base.lib(glcd.o)
+    0x000011b4   0x000011b4   0x00000040   Code   RO           88    .text._DelayMs      system_lpc407x_8x_177x_8x.o
+    0x000011f4   0x000011f4   0x0000001a   Code   RO          150    .text._sys_exit     lpc40xx_base.lib(glcd.o)
     0x0000120e   0x0000120e   0x00000002   PAD
-    0x00001210   0x00001210   0x00000078   Code   RO          210    .text.adjust_timing  lpc40xx_base.lib(sdram.o)
-    0x00001288   0x00001288   0x00000034   Code   RO           29    .text.dibujar_pixel  sprites.o
-    0x000012bc   0x000012bc   0x00000080   Code   RO           27    .text.dibujar_sprite  sprites.o
-    0x0000133c   0x0000133c   0x00000010   Code   RO          130    .text.ferror        lpc40xx_base.lib(glcd.o)
-    0x0000134c   0x0000134c   0x00000084   Code   RO           66    .text.fpu_init      system_lpc407x_8x_177x_8x.o
-    0x000013d0   0x000013d0   0x000001a2   Code   RO          122    .text.fputc         lpc40xx_base.lib(glcd.o)
-    0x00001572   0x00001572   0x00000002   PAD
-    0x00001574   0x00001574   0x00000016   Code   RO          118    .text.glcd_borrar   lpc40xx_base.lib(glcd.o)
-    0x0000158a   0x0000158a   0x00000002   PAD
-    0x0000158c   0x0000158c   0x000000f0   Code   RO          126    .text.glcd_caracter  lpc40xx_base.lib(glcd.o)
-    0x0000167c   0x0000167c   0x0000000c   Code   RO          134    .text.glcd_color_texto  lpc40xx_base.lib(glcd.o)
-    0x00001688   0x00001688   0x0000000c   Code   RO          136    .text.glcd_fondo_texto  lpc40xx_base.lib(glcd.o)
-    0x00001694   0x00001694   0x00000074   Code   RO          116    .text.glcd_i2c0_transmitir_buffer  lpc40xx_base.lib(glcd.o)
-    0x00001708   0x00001708   0x000002dc   Code   RO          114    .text.glcd_inicializar  lpc40xx_base.lib(glcd.o)
-    0x000019e4   0x000019e4   0x00000084   Code   RO          154    .text.glcd_rectangulo_relleno  lpc40xx_base.lib(glcd.o)
-    0x00001a68   0x00001a68   0x00000048   Code   RO          142    .text.glcd_seleccionar_fuente  lpc40xx_base.lib(glcd.o)
-    0x00001ab0   0x00001ab0   0x00000024   Code   RO          138    .text.glcd_xy_texto  lpc40xx_base.lib(glcd.o)
-    0x00001ad4   0x00001ad4   0x00000140   Code   RO          179    .text.i2c_inicializar  lpc40xx_i2c.lib(i2c_lpc40xx.o)
-    0x00001c14   0x00001c14   0x00000074   Code   RO          187    .text.i2c_recibir_byte  lpc40xx_i2c.lib(i2c_lpc40xx.o)
-    0x00001c88   0x00001c88   0x00000054   Code   RO          181    .text.i2c_start     lpc40xx_i2c.lib(i2c_lpc40xx.o)
-    0x00001cdc   0x00001cdc   0x0000005c   Code   RO          183    .text.i2c_stop      lpc40xx_i2c.lib(i2c_lpc40xx.o)
-    0x00001d38   0x00001d38   0x0000007c   Code   RO          185    .text.i2c_transmitir_byte  lpc40xx_i2c.lib(i2c_lpc40xx.o)
-    0x00001db4   0x00001db4   0x00000188   Code   RO          246    .text.iocon_configurar_pin  lpc40xx_base.lib(iocon_lpc40xx.o)
-    0x00001f3c   0x00001f3c   0x000000a6   Code   RO           40    .text.jugador_actualizar  jugador.o
-    0x00001fe2   0x00001fe2   0x00000002   PAD
-    0x00001fe4   0x00001fe4   0x00000018   Code   RO            6    .text.jugador_borrar  main.o
-    0x00001ffc   0x00001ffc   0x00000014   Code   RO           38    .text.jugador_crear  jugador.o
-    0x00002010   0x00002010   0x0000001a   Code   RO            4    .text.jugador_dibujar  main.o
-    0x0000202a   0x0000202a   0x00000002   PAD
-    0x0000202c   0x0000202c   0x00000052   Code   RO            2    .text.main          main.o
-    0x0000207e   0x0000207e   0x00000002   PAD
-    0x00002080   0x00002080   0x00000114   Code   RO           16    .text.nunchuk_inicializar  nunchuk.o
-    0x00002194   0x00002194   0x000000d0   Code   RO           18    .text.nunchuk_leer  nunchuk.o
-    0x00002264   0x00002264   0x000000c0   Code   RO          198    .text.parar_con_error  lpc40xx_base.lib(error.o)
-    0x00002324   0x00002324   0x0000053e   Code   RO          212    .text.sdram_inicializar  lpc40xx_base.lib(sdram.o)
-    0x00002862   0x00002862   0x00000002   PAD
-    0x00002864   0x00002864   0x0000006c   Code   RO          214    .text.sdram_test    lpc40xx_base.lib(sdram.o)
-    0x000028d0   0x000028d0   0x000000a4   Code   RO           85    .text.timer_inicializar  lpc40xx_base.lib(timer_lpc40xx.o)
-    0x00002974   0x00002974   0x000000b0   Code   RO           87    .text.timer_retardo_ms  lpc40xx_base.lib(timer_lpc40xx.o)
-    0x00002a24   0x00002a24   0x000000b0   Code   RO           89    .text.timer_retardo_us  lpc40xx_base.lib(timer_lpc40xx.o)
-    0x00002ad4   0x00002ad4   0x0000000e   Code   RO          285    i._is_digit         c_w.l(__printf_wp.o)
-    0x00002ae2   0x00002ae2   0x0000001a   Code   RO          538    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00002afc   0x00002afc   0x00000011   Data   RO          293    .constdata          c_w.l(__printf_flags_ss_wp.o)
-    0x00002b0d   0x00002b0d   0x00000003   PAD
-    0x00002b10   0x00002b10   0x00000014   Data   RO          232    .rodata.fuente_12x24  lpc40xx_base.lib(fuente_12x24.o)
-    0x00002b24   0x00002b24   0x00002a00   Data   RO          233    .rodata.fuente_12x24_datos  lpc40xx_base.lib(fuente_12x24.o)
-    0x00005524   0x00005524   0x00000014   Data   RO          239    .rodata.fuente_16x32  lpc40xx_base.lib(fuente_16x32.o)
-    0x00005538   0x00005538   0x00003800   Data   RO          240    .rodata.fuente_16x32_datos  lpc40xx_base.lib(fuente_16x32.o)
-    0x00008d38   0x00008d38   0x00000014   Data   RO          225    .rodata.fuente_8x16  lpc40xx_base.lib(fuente_8x16.o)
-    0x00008d4c   0x00008d4c   0x00000e00   Data   RO          226    .rodata.fuente_8x16_datos  lpc40xx_base.lib(fuente_8x16.o)
-    0x00009b4c   0x00009b4c   0x00000088   Data   RO          105    .rodata.str1.1      lpc40xx_base.lib(timer_lpc40xx.o)
-    0x00009bd4   0x00009bd4   0x00000025   Data   RO          168    .rodata.str1.1      lpc40xx_base.lib(glcd.o)
-    0x00009bf9   0x00009bf9   0x00000041   Data   RO          189    .rodata.str1.1      lpc40xx_i2c.lib(i2c_lpc40xx.o)
-    0x00009c3a   0x00009c3a   0x00000083   Data   RO          250    .rodata.str1.1      lpc40xx_base.lib(iocon_lpc40xx.o)
-    0x00009cbd   0x00009cbd   0x00000003   PAD
-    0x00009cc0   0x00009cc0   0x0000000c   Data   RO          160    .rodata.tabla_fuentes  lpc40xx_base.lib(glcd.o)
-    0x00009ccc   0x00009ccc   0x00000c00   Data   RO          251    .rodata.tabla_funciones_pines  lpc40xx_base.lib(iocon_lpc40xx.o)
-    0x0000a8cc   0x0000a8cc   0x00000020   Data   RO          607    Region$$Table       anon$$obj.o
+    0x00001210   0x00001210   0x00000078   Code   RO          228    .text.adjust_timing  lpc40xx_base.lib(sdram.o)
+    0x00001288   0x00001288   0x00000020   Code   RO           55    .text.dibujar_panel  jugador.o
+    0x000012a8   0x000012a8   0x00000034   Code   RO           24    .text.dibujar_pixel  sprites.o
+    0x000012dc   0x000012dc   0x00000080   Code   RO           22    .text.dibujar_sprite  sprites.o
+    0x0000135c   0x0000135c   0x00000022   Code   RO           53    .text.enemigo_borrar  jugador.o
+    0x0000137e   0x0000137e   0x00000002   PAD
+    0x00001380   0x00001380   0x00000030   Code   RO           37    .text.enemigo_crear  jugador.o
+    0x000013b0   0x000013b0   0x00000024   Code   RO           47    .text.enemigo_dibujar  jugador.o
+    0x000013d4   0x000013d4   0x00000010   Code   RO          148    .text.ferror        lpc40xx_base.lib(glcd.o)
+    0x000013e4   0x000013e4   0x00000084   Code   RO           84    .text.fpu_init      system_lpc407x_8x_177x_8x.o
+    0x00001468   0x00001468   0x000001a2   Code   RO          140    .text.fputc         lpc40xx_base.lib(glcd.o)
+    0x0000160a   0x0000160a   0x00000002   PAD
+    0x0000160c   0x0000160c   0x00000016   Code   RO          136    .text.glcd_borrar   lpc40xx_base.lib(glcd.o)
+    0x00001622   0x00001622   0x00000002   PAD
+    0x00001624   0x00001624   0x000000f0   Code   RO          144    .text.glcd_caracter  lpc40xx_base.lib(glcd.o)
+    0x00001714   0x00001714   0x0000000c   Code   RO          152    .text.glcd_color_texto  lpc40xx_base.lib(glcd.o)
+    0x00001720   0x00001720   0x0000000c   Code   RO          154    .text.glcd_fondo_texto  lpc40xx_base.lib(glcd.o)
+    0x0000172c   0x0000172c   0x00000074   Code   RO          134    .text.glcd_i2c0_transmitir_buffer  lpc40xx_base.lib(glcd.o)
+    0x000017a0   0x000017a0   0x000002dc   Code   RO          132    .text.glcd_inicializar  lpc40xx_base.lib(glcd.o)
+    0x00001a7c   0x00001a7c   0x00000084   Code   RO          172    .text.glcd_rectangulo_relleno  lpc40xx_base.lib(glcd.o)
+    0x00001b00   0x00001b00   0x00000048   Code   RO          160    .text.glcd_seleccionar_fuente  lpc40xx_base.lib(glcd.o)
+    0x00001b48   0x00001b48   0x00000024   Code   RO          156    .text.glcd_xy_texto  lpc40xx_base.lib(glcd.o)
+    0x00001b6c   0x00001b6c   0x00000140   Code   RO          197    .text.i2c_inicializar  lpc40xx_i2c.lib(i2c_lpc40xx.o)
+    0x00001cac   0x00001cac   0x00000074   Code   RO          205    .text.i2c_recibir_byte  lpc40xx_i2c.lib(i2c_lpc40xx.o)
+    0x00001d20   0x00001d20   0x00000054   Code   RO          199    .text.i2c_start     lpc40xx_i2c.lib(i2c_lpc40xx.o)
+    0x00001d74   0x00001d74   0x0000005c   Code   RO          201    .text.i2c_stop      lpc40xx_i2c.lib(i2c_lpc40xx.o)
+    0x00001dd0   0x00001dd0   0x0000007c   Code   RO          203    .text.i2c_transmitir_byte  lpc40xx_i2c.lib(i2c_lpc40xx.o)
+    0x00001e4c   0x00001e4c   0x00000188   Code   RO          264    .text.iocon_configurar_pin  lpc40xx_base.lib(iocon_lpc40xx.o)
+    0x00001fd4   0x00001fd4   0x00000014   Code   RO           41    .text.juego_actualizar  jugador.o
+    0x00001fe8   0x00001fe8   0x0000004c   Code   RO           49    .text.juego_borrar  jugador.o
+    0x00002034   0x00002034   0x0000004c   Code   RO           43    .text.juego_dibujar  jugador.o
+    0x00002080   0x00002080   0x00000082   Code   RO           39    .text.juego_inicializar  jugador.o
+    0x00002102   0x00002102   0x00000002   PAD
+    0x00002104   0x00002104   0x000000a8   Code   RO           35    .text.jugador_actualizar  jugador.o
+    0x000021ac   0x000021ac   0x00000018   Code   RO           51    .text.jugador_borrar  jugador.o
+    0x000021c4   0x000021c4   0x00000014   Code   RO           33    .text.jugador_crear  jugador.o
+    0x000021d8   0x000021d8   0x0000001a   Code   RO           45    .text.jugador_dibujar  jugador.o
+    0x000021f2   0x000021f2   0x00000002   PAD
+    0x000021f4   0x000021f4   0x00000056   Code   RO            2    .text.main          main.o
+    0x0000224a   0x0000224a   0x00000002   PAD
+    0x0000224c   0x0000224c   0x00000114   Code   RO           11    .text.nunchuk_inicializar  nunchuk.o
+    0x00002360   0x00002360   0x000000d0   Code   RO           13    .text.nunchuk_leer  nunchuk.o
+    0x00002430   0x00002430   0x000000c0   Code   RO          216    .text.parar_con_error  lpc40xx_base.lib(error.o)
+    0x000024f0   0x000024f0   0x0000053e   Code   RO          230    .text.sdram_inicializar  lpc40xx_base.lib(sdram.o)
+    0x00002a2e   0x00002a2e   0x00000002   PAD
+    0x00002a30   0x00002a30   0x0000006c   Code   RO          232    .text.sdram_test    lpc40xx_base.lib(sdram.o)
+    0x00002a9c   0x00002a9c   0x000000a4   Code   RO          103    .text.timer_inicializar  lpc40xx_base.lib(timer_lpc40xx.o)
+    0x00002b40   0x00002b40   0x000000b0   Code   RO          105    .text.timer_retardo_ms  lpc40xx_base.lib(timer_lpc40xx.o)
+    0x00002bf0   0x00002bf0   0x000000b0   Code   RO          107    .text.timer_retardo_us  lpc40xx_base.lib(timer_lpc40xx.o)
+    0x00002ca0   0x00002ca0   0x0000000e   Code   RO          303    i._is_digit         c_w.l(__printf_wp.o)
+    0x00002cae   0x00002cae   0x0000001a   Code   RO          556    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x00002cc8   0x00002cc8   0x00000011   Data   RO          311    .constdata          c_w.l(__printf_flags_ss_wp.o)
+    0x00002cd9   0x00002cd9   0x00000003   PAD
+    0x00002cdc   0x00002cdc   0x00000014   Data   RO          250    .rodata.fuente_12x24  lpc40xx_base.lib(fuente_12x24.o)
+    0x00002cf0   0x00002cf0   0x00002a00   Data   RO          251    .rodata.fuente_12x24_datos  lpc40xx_base.lib(fuente_12x24.o)
+    0x000056f0   0x000056f0   0x00000014   Data   RO          257    .rodata.fuente_16x32  lpc40xx_base.lib(fuente_16x32.o)
+    0x00005704   0x00005704   0x00003800   Data   RO          258    .rodata.fuente_16x32_datos  lpc40xx_base.lib(fuente_16x32.o)
+    0x00008f04   0x00008f04   0x00000014   Data   RO          243    .rodata.fuente_8x16  lpc40xx_base.lib(fuente_8x16.o)
+    0x00008f18   0x00008f18   0x00000e00   Data   RO          244    .rodata.fuente_8x16_datos  lpc40xx_base.lib(fuente_8x16.o)
+    0x00009d18   0x00009d18   0x00000088   Data   RO          123    .rodata.str1.1      lpc40xx_base.lib(timer_lpc40xx.o)
+    0x00009da0   0x00009da0   0x00000025   Data   RO          186    .rodata.str1.1      lpc40xx_base.lib(glcd.o)
+    0x00009dc5   0x00009dc5   0x00000041   Data   RO          207    .rodata.str1.1      lpc40xx_i2c.lib(i2c_lpc40xx.o)
+    0x00009e06   0x00009e06   0x00000083   Data   RO          268    .rodata.str1.1      lpc40xx_base.lib(iocon_lpc40xx.o)
+    0x00009e89   0x00009e89   0x00000003   PAD
+    0x00009e8c   0x00009e8c   0x0000000c   Data   RO          178    .rodata.tabla_fuentes  lpc40xx_base.lib(glcd.o)
+    0x00009e98   0x00009e98   0x00000c00   Data   RO          269    .rodata.tabla_funciones_pines  lpc40xx_base.lib(iocon_lpc40xx.o)
+    0x0000aa98   0x0000aa98   0x00000020   Data   RO          625    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x0000a8f0, Size: 0x00000498, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x0000aab8, Size: 0x00000598, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x10000000   0x0000a8f0   0x00000004   Data   RW           76    .data.EMCClock      system_lpc407x_8x_177x_8x.o
-    0x10000004   0x0000a8f4   0x00000004   Data   RW           75    .data.PeripheralClock  system_lpc407x_8x_177x_8x.o
-    0x10000008   0x0000a8f8   0x00000004   Data   RW           74    .data.SystemCoreClock  system_lpc407x_8x_177x_8x.o
-    0x1000000c   0x0000a8fc   0x00000004   Data   RW           77    .data.USBClock      system_lpc407x_8x_177x_8x.o
-    0x10000010   0x0000a900   0x00000002   Data   RW          166    .data.color_texto_actual  lpc40xx_base.lib(glcd.o)
-    0x10000012   0x0000a902   0x00000001   Data   RW          165    .data.desplazamiento_activado  lpc40xx_base.lib(glcd.o)
-    0x10000013   0x0000a903   0x00000001   PAD
-    0x10000014   0x0000a904   0x00000004   Data   RW          161    .data.fuente_actual  lpc40xx_base.lib(glcd.o)
-    0x10000018   0x0000a908   0x00000008   Data   RW           42    .data.sprite_jugador  jugador.o
-    0x10000020        -       0x00000060   Zero   RW          469    .bss                c_w.l(libspace.o)
-    0x10000080        -       0x00000004   Zero   RW          162    .bss.__stdout       lpc40xx_base.lib(glcd.o)
-    0x10000084        -       0x00000002   Zero   RW          167    .bss.color_fondo_texto_actual  lpc40xx_base.lib(glcd.o)
-    0x10000086   0x0000a910   0x00000002   PAD
-    0x10000088        -       0x00000008   Zero   RW          216    .bss.ringosccount   lpc40xx_base.lib(sdram.o)
-    0x10000090        -       0x00000004   Zero   RW          163    .bss.x_texto_actual  lpc40xx_base.lib(glcd.o)
-    0x10000094        -       0x00000004   Zero   RW          164    .bss.y_texto_actual  lpc40xx_base.lib(glcd.o)
-    0x10000098        -       0x00000000   Zero   RW           52    HEAP                startup_lpc407x_8x_177x_8x.o
-    0x10000098        -       0x00000400   Zero   RW           51    STACK               startup_lpc407x_8x_177x_8x.o
+    0x10000000   0x0000aab8   0x00000004   Data   RW           94    .data.EMCClock      system_lpc407x_8x_177x_8x.o
+    0x10000004   0x0000aabc   0x00000004   Data   RW           93    .data.PeripheralClock  system_lpc407x_8x_177x_8x.o
+    0x10000008   0x0000aac0   0x00000004   Data   RW           92    .data.SystemCoreClock  system_lpc407x_8x_177x_8x.o
+    0x1000000c   0x0000aac4   0x00000004   Data   RW           95    .data.USBClock      system_lpc407x_8x_177x_8x.o
+    0x10000010   0x0000aac8   0x00000002   Data   RW          184    .data.color_texto_actual  lpc40xx_base.lib(glcd.o)
+    0x10000012   0x0000aaca   0x00000001   Data   RW          183    .data.desplazamiento_activado  lpc40xx_base.lib(glcd.o)
+    0x10000013   0x0000aacb   0x00000001   PAD
+    0x10000014   0x0000aacc   0x00000004   Data   RW          179    .data.fuente_actual  lpc40xx_base.lib(glcd.o)
+    0x10000018   0x0000aad0   0x00000008   Data   RW           59    .data.sprite_enemigo_a  jugador.o
+    0x10000020   0x0000aad8   0x00000008   Data   RW           60    .data.sprite_enemigo_b  jugador.o
+    0x10000028   0x0000aae0   0x00000008   Data   RW           57    .data.sprite_jugador  jugador.o
+    0x10000030        -       0x00000060   Zero   RW          487    .bss                c_w.l(libspace.o)
+    0x10000090        -       0x00000004   Zero   RW          180    .bss.__stdout       lpc40xx_base.lib(glcd.o)
+    0x10000094        -       0x00000002   Zero   RW          185    .bss.color_fondo_texto_actual  lpc40xx_base.lib(glcd.o)
+    0x10000096   0x0000aae8   0x00000002   PAD
+    0x10000098        -       0x000000f0   Zero   RW           61    .bss.enemigos       jugador.o
+    0x10000188        -       0x00000008   Zero   RW          234    .bss.ringosccount   lpc40xx_base.lib(sdram.o)
+    0x10000190        -       0x00000004   Zero   RW          181    .bss.x_texto_actual  lpc40xx_base.lib(glcd.o)
+    0x10000194        -       0x00000004   Zero   RW          182    .bss.y_texto_actual  lpc40xx_base.lib(glcd.o)
+    0x10000198        -       0x00000000   Zero   RW           70    HEAP                startup_lpc407x_8x_177x_8x.o
+    0x10000198        -       0x00000400   Zero   RW           69    STACK               startup_lpc407x_8x_177x_8x.o
 
 
 ==============================================================================
@@ -1482,17 +1564,17 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       186          0          8          8          0       1334   jugador.o
-       132          0          0          0          0       1652   main.o
+       690          0          8         24        240       3220   jugador.o
+        86          0          0          0          0       1405   main.o
        484          0          0          0          0       2256   nunchuk.o
        180          0          0          0          0       1051   sprites.o
         64         26        228          0       1024       1160   startup_lpc407x_8x_177x_8x.o
       2892          0          0         16          0       9755   system_lpc407x_8x_177x_8x.o
 
     ----------------------------------------------------------------------
-      3948         26        268         24       1024      17208   Object Totals
+      4408         26        268         40       1264      18847   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        10          0          0          0          0          0   (incl. Padding)
+        12          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1566,15 +1648,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     10768        478      32476         32       1144      77669   Grand Totals
-     10768        478      32476         32       1144      77669   ELF Image Totals
-     10768        478      32476         32          0          0   ROM Totals
+     11228        478      32476         48       1384      79308   Grand Totals
+     11228        478      32476         48       1384      79308   ELF Image Totals
+     11228        478      32476         48          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                43244 (  42.23kB)
-    Total RW  Size (RW Data + ZI Data)              1176 (   1.15kB)
-    Total ROM Size (Code + RO Data + RW Data)      43276 (  42.26kB)
+    Total RO  Size (Code + RO Data)                43704 (  42.68kB)
+    Total RW  Size (RW Data + ZI Data)              1432 (   1.40kB)
+    Total ROM Size (Code + RO Data + RW Data)      43752 (  42.73kB)
 
 ==============================================================================
 
