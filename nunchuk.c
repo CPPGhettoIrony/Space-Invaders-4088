@@ -5,36 +5,42 @@ bool_t nunchuk_inicializar() {
 	// Inicializar I2C
 	i2c_inicializar(I2C0, 100000, PORT0, PIN27, PORT0, PIN28);
 	
+	// Inicializar Timer
 	timer_inicializar(TIMER0);
 	
+	
+	// Handshake para inicializar la comunicación I2C
+	
 	i2c_start(I2C0);
-	bool_t a0 = i2c_transmitir_byte(I2C0, NUNCHUK_DIRECCION);  // Dirección + write
+	bool_t a0 = i2c_transmitir_byte(I2C0, NUNCHUK_DIRECCION);  
 	bool_t a1 = i2c_transmitir_byte(I2C0, 0xF0);
 	bool_t a2 = i2c_transmitir_byte(I2C0, 0x55);
 	i2c_stop(I2C0);
 
-	timer_retardo_ms(TIMER0, 10); // espera obligatoria
+	timer_retardo_ms(TIMER0, 10); 	// espera obligatoria
 
 	i2c_start(I2C0);
-	bool_t a3 = i2c_transmitir_byte(I2C0, NUNCHUK_DIRECCION);  // Dirección + write
+	bool_t a3 = i2c_transmitir_byte(I2C0, NUNCHUK_DIRECCION);  
 	bool_t a4 = i2c_transmitir_byte(I2C0, 0xFB);
 	bool_t a5 = i2c_transmitir_byte(I2C0, 0x00);
 	i2c_stop(I2C0);
 
-	timer_retardo_ms(TIMER0, 10);
+	timer_retardo_ms(TIMER0, 10);		// espera obligatoria
 	
 	return a0 && a1 && a2 && a3 && a4 && a5;
 }
 
 bool_t nunchuk_leer(uint8_t* data) {
 	
+	// Transmisión necesaria para inicializar la transferencia de datos
 	i2c_start(I2C0);
 	bool_t a0 = i2c_transmitir_byte(I2C0, NUNCHUK_DIRECCION);
 	bool_t a1 = i2c_transmitir_byte(I2C0, 0x00);
 	i2c_stop(I2C0);
 	
-	timer_retardo_ms(TIMER0, 1);
-	
+	timer_retardo_ms(TIMER0, 1);	// espera obligatoria
+
+	// Recibir la información necesaria
 	i2c_start(I2C0);
 	bool_t a2 = i2c_transmitir_byte(I2C0, NUNCHUK_DIRECCION | 1);
 	for(uint8_t i = 0; i < 6; ++i)

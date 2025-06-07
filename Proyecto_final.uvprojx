@@ -390,16 +390,6 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>ejemplo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ejemplo.c</FilePath>
-            </File>
-            <File>
-              <FileName>ejemplo.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\ejemplo.h</FilePath>
-            </File>
-            <File>
               <FileName>nunchuk.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\nunchuk.h</FilePath>
@@ -408,6 +398,16 @@
               <FileName>nunchuk.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\nunchuk.c</FilePath>
+            </File>
+            <File>
+              <FileName>sprites.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sprites.c</FilePath>
+            </File>
+            <File>
+              <FileName>sprites.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sprites.h</FilePath>
             </File>
           </Files>
         </Group>
