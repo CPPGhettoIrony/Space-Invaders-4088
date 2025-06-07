@@ -21,26 +21,20 @@ void bajo_consumo(void);
 int main(){
 	
 	//Habilitamos las interrupciones globalmente
-	__enable_irq();
 	
 	//Definimos si necesitamos alguna variable local en el main
-	uint8_t nunchuk_data[6];
-	nunchuk_inicializar();
+	uint8_t nunchuk_data[6] = {0,0,0,0,0,0};
+	bool_t inicializado = nunchuk_inicializar();
 	
-	timer_inicializar(TIMER0);
-	timer_retardo_us(TIMER0, 10);
 	
-	//Inicializamos el resto de periféricos: i2c, uart, lcd, etc.
 	glcd_inicializar();
 
 	while(1){
 		
-		nunchuk_leer(nunchuk_data);
+		bool_t lectura = nunchuk_leer(nunchuk_data);
 		
-		glcd_xprintf(0, 0, BLANCO, NEGRO, FUENTE8X16, "Nunchuk:  [%u, %u, %u, %u, %u, %u]", 
-								nunchuk_data[0], nunchuk_data[1], nunchuk_data[2], nunchuk_data[3], nunchuk_data[4], nunchuk_data[5]);	
-
-		timer_retardo_us(TIMER0, 10);
+		glcd_xprintf(0, 0, BLANCO, NEGRO, FUENTE8X16, "Inicialización: %u\r\nLectura: %u\n\rNunchuk:  [%u, %u, %u, %u, %u, %u]", 
+								inicializado, lectura, nunchuk_data[0], nunchuk_data[1], nunchuk_data[2], nunchuk_data[3], nunchuk_data[4], nunchuk_data[5]);	
 				
 	}
 }

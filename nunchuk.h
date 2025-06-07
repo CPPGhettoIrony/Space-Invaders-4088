@@ -5,10 +5,11 @@
 #include "tipos.h"
 #include "i2c_lpc40xx.h"
 #include "gpio_lpc40xx.h"
+#include "timer_lpc40xx.h"
 
-#define NUNCHUK_DIRECCION 0x52
+#define NUNCHUK_DIRECCION 0xA4
 
-void nunchuk_inicializar();
-void nunchuk_leer(uint8_t* data);
+bool_t nunchuk_inicializar();
+bool_t nunchuk_leer(uint8_t* data);
 
 #endif
