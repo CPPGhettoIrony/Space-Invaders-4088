@@ -66,6 +66,8 @@ enemigo enemigo_crear(int32_t x, int32_t y) {
 
 juego* j_g;
 
+void enemigos_dibujar();
+
 juego juego_inicializar() {
 	
 	__enable_irq();
@@ -89,26 +91,34 @@ juego juego_inicializar() {
 		j, 
 		0, 
 		n_enemigos,
-		0, 0
+		1, 0,
+		1,
+		0, 0, 0
 	};
 	
 	j_g = &ret;
+	
+	enemigos_dibujar();
 	
 	return ret;
 }
 
 void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
+	
 	jugador_actualizar(&j->jugador, nunchuk_data);
+	
 }
 
 void enemigos_dibujar() {
 	for(uint8_t i = 0; i < n_enemigos; ++i)
-		enemigo_dibujar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
+		if(enemigos[i].vivo)
+			enemigo_dibujar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
 }
 
 void enemigos_borrar() {
 	for(uint8_t i = 0; i < n_enemigos; ++i)
-		enemigo_borrar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
+		if(enemigos[i].vivo)
+			enemigo_borrar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
 }
 
 void juego_dibujar(juego* j) {
@@ -123,7 +133,12 @@ void TIMER1_IRQHandler(void) {
 	
 		enemigos_borrar();
 	
-		++j_g->x; 
+		if(j_g->x + n_enem_linea * 12 > max_x || j_g->x <= 0) {
+			j_g->direccion = -j_g->direccion;
+			++j_g->y;
+		}
+	
+		j_g->x += j_g->direccion; 
 		j_g->sprite = !j_g->sprite;
 	
 		enemigos_dibujar();
