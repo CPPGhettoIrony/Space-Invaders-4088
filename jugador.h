@@ -59,6 +59,7 @@ typedef struct {
 	int32_t		x, y, direccion;
 	int8_t		offset_x_a, offset_x_b, offset_y;
 	uint32_t  periodo;
+	bool_t		game_over;
 } juego;
 
 juego juego_inicializar();

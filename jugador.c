@@ -12,10 +12,9 @@ uint8_t sprite_jugador[8] = {
 };
 
 uint8_t sprite_bala[8] = {
-	0b00100000,
-	0b01010000,
-	0b10001000,
-	0, 0, 0, 0, 0
+	0b01000000,
+	0b10100000,
+	0, 0, 0, 0, 0, 0
 };
 
 jugador jugador_crear() {
@@ -99,7 +98,8 @@ juego juego_inicializar() {
 		n_enemigos,
 		1, 0,
 		1,
-		0, 0, 0, 1000
+		0, 0, 0, 1000,
+		FALSE
 	};
 	
 	__enable_irq();
@@ -150,15 +150,20 @@ void TIMER1_IRQHandler(void) {
 	
 		enemigos_borrar();
 	
+		
+	
 		if(j_g->x + (n_enem_linea - j_g->offset_x_b) * 12 > max_x || j_g->x + j_g->offset_x_a * 12 <= 0) {
 			j_g->direccion = -j_g->direccion;
 			j_g->y+=2;
 		}
-	
+		
 		j_g->x += j_g->direccion; 
 		j_g->sprite = !j_g->sprite;
 	
 		enemigos_dibujar();
+		
+		if(!j_g->game_over && j_g->y + (n_enemigos/n_enem_linea - j_g->offset_y) * 12 > altura)
+			j_g->game_over = TRUE;
 	
 		LPC_TIMER1->IR = 1;
 		NVIC_ClearPendingIRQ(TIMER1_IRQn);
@@ -167,15 +172,21 @@ void TIMER1_IRQHandler(void) {
 void enemigo_eliminar_columnas() {
 		
 	bool_t 	eliminar_columna_izq = TRUE,
-					eliminar_columna_der = TRUE;
+					eliminar_columna_der = TRUE,
+					eliminar_fila				 = TRUE;
 	
 	for(uint8_t i = 0; i < n_enemigos / n_enem_linea; ++i) {
 		eliminar_columna_izq = eliminar_columna_izq && !enemigos[i*n_enem_linea + j_g->offset_x_a].vivo;
 		eliminar_columna_der = eliminar_columna_der && !enemigos[(i+1)*n_enem_linea - j_g->offset_x_b - 1].vivo;
 	}
 	
+	for(uint8_t i = 0; i < n_enem_linea; ++i)
+		eliminar_fila = eliminar_fila && !enemigos[ n_enemigos - ((j_g->offset_y + 1) * n_enem_linea) + i].vivo;
+	
 	j_g->offset_x_a += eliminar_columna_izq;
 	j_g->offset_x_b += eliminar_columna_der;
+	
+	j_g->offset_y		+= eliminar_fila;
 	
 }
 
@@ -249,4 +260,5 @@ void dibujar_panel() {
 			glcd_punto(x, y, green | intensity);
 			
 		}
+		
 }
