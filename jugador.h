@@ -5,7 +5,7 @@
 #include "nunchuk.h"
 
 #define altura 	120
-#define max_x		144
+#define max_x		168
 
 typedef struct {
 	uint8_t*	sprite;
@@ -24,7 +24,8 @@ inline static void jugador_borrar(jugador* j) {
 	dibujar_sprite(j->sprite, j->posicion, altura, NEGRO);
 }
 
-#define n_enemigos 12
+#define n_enem_linea	12
+#define n_enemigos 		48
 
 typedef struct{
 	uint8_t*	sprites[2];
@@ -34,17 +35,19 @@ typedef struct{
 
 enemigo enemigo_crear(int32_t x, int32_t y);
 
-inline static void enemigo_dibujar(enemigo* e, uint8_t sprite) {
-	dibujar_sprite(e->sprites[sprite], e->x, e->y, VERDE);
+inline static void enemigo_dibujar(enemigo* e, uint8_t sprite, int32_t offset_x, int32_t offset_y) {
+	dibujar_sprite(e->sprites[sprite], e->x + offset_x, e->y + offset_y, VERDE);
 }
 
-inline static void enemigo_borrar(enemigo* e, uint8_t sprite) {
-	dibujar_sprite(e->sprites[sprite], e->x, e->y, NEGRO);
+inline static void enemigo_borrar(enemigo* e, uint8_t sprite, int32_t offset_x, int32_t offset_y) {
+	dibujar_sprite(e->sprites[sprite], e->x + offset_x, e->y + offset_y, NEGRO);
 }
 
 typedef struct {
 	jugador		jugador;
 	uint8_t		sprite;
+	uint8_t		enemigos;
+	int32_t		x, y;
 } juego;
 
 juego juego_inicializar();

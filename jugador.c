@@ -64,16 +64,35 @@ enemigo enemigo_crear(int32_t x, int32_t y) {
 	return ret;
 }
 
+juego* j_g;
+
 juego juego_inicializar() {
+	
+	__enable_irq();
+	
+	timer_inicializar(TIMER1);
+	
+	NVIC_ClearPendingIRQ(TIMER1_IRQn);
+	LPC_TIMER1->IR |= 1;	
+	
+	timer_iniciar_ciclos_ms(TIMER1, 1000);
+	
+	NVIC_SetPriority(TIMER1_IRQn, 1);
+	NVIC_EnableIRQ(TIMER1_IRQn);    
 	
 	jugador j = jugador_crear();
 	
 	for(uint8_t i = 0; i < n_enemigos; ++i) 
-		enemigos[i] = enemigo_crear(4 + i*12, 4);
+		enemigos[i] = enemigo_crear(4 + (i % n_enem_linea) * 12 , 4 + (i / n_enem_linea) * 12);
 	
 	juego ret = {
-		j, 0
+		j, 
+		0, 
+		n_enemigos,
+		0, 0
 	};
+	
+	j_g = &ret;
 	
 	return ret;
 }
@@ -82,24 +101,63 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 	jugador_actualizar(&j->jugador, nunchuk_data);
 }
 
-void juego_dibujar(juego* j) {
-	
-	jugador_dibujar(&j->jugador);
-	
+void enemigos_dibujar() {
 	for(uint8_t i = 0; i < n_enemigos; ++i)
-		enemigo_dibujar(&enemigos[i], j->sprite);
-	
+		enemigo_dibujar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
+}
+
+void enemigos_borrar() {
+	for(uint8_t i = 0; i < n_enemigos; ++i)
+		enemigo_borrar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
+}
+
+void juego_dibujar(juego* j) {
+	jugador_dibujar(&j->jugador);
 }
 
 void juego_borrar(juego* j) {
-	
 	jugador_borrar(&j->jugador);
+}
+
+void TIMER1_IRQHandler(void) {
 	
-	for(uint8_t i = 0; i < n_enemigos; ++i)
-		enemigo_borrar(&enemigos[i], j->sprite);
+		enemigos_borrar();
+	
+		++j_g->x; 
+		j_g->sprite = !j_g->sprite;
+	
+		enemigos_dibujar();
+	
+		LPC_TIMER1->IR = 1;
+		NVIC_ClearPendingIRQ(TIMER1_IRQn);
+}
+
+uint8_t samplear_rango(float in, float samples) {
+	
+	uint8_t out = 0;
+	
+	for(float f = 0; f < 1; f += 1./samples)
+		out += (in >= f);
+	
+	return out;
 	
 }
 
 void dibujar_panel() {
-	glcd_rectangulo_relleno((max_x + 8) * TAM_PIXEL, 0, GLCD_TAMANO_X, GLCD_TAMANO_Y, AZUL_OSCURO);
+	
+	static const int32_t width =  GLCD_TAMANO_X - (max_x + 10) * TAM_PIXEL;
+	
+	for(int32_t x = (max_x + 10) * TAM_PIXEL; x <= GLCD_TAMANO_X; ++x)
+		for(int32_t y = 0; y <= GLCD_TAMANO_Y; ++y) {
+			
+			float col_green 		= (float)(x - (max_x + 10) * TAM_PIXEL) / (float)width,
+						col_intensity	= (float) y / (float) GLCD_TAMANO_Y;
+			
+			uint8_t green 			= (samplear_rango(col_green * col_intensity, 16.) & 0xF) << 4,
+							intensity		= samplear_rango(col_intensity, 						16.)  & 0xF;
+			
+			//printf("%f, %f, %u, %u\n\r", col_green, col_intensity, green, intensity);
+			glcd_punto(x, y, green | intensity);
+			
+		}
 }

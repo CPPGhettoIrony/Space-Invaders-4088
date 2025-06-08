@@ -10,10 +10,6 @@
 
 int main(){
 
-	//Definimos si necesitamos alguna variable local en el main
-	
-	juego j = juego_inicializar();
-
 	uint8_t nunchuk_data[6] = {0,0,0,0,0,0};
 	
 	nunchuk_inicializar();
@@ -22,7 +18,9 @@ int main(){
 	glcd_inicializar();
 	
 	dibujar_panel();
-
+	
+	juego j = juego_inicializar();
+	
 	while(1){
 		
 		juego_actualizar(&j, nunchuk_data);
@@ -35,4 +33,5 @@ int main(){
 		juego_borrar(&j);
 				
 	}
+
 }
