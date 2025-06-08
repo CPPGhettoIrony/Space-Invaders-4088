@@ -57,7 +57,8 @@ typedef struct {
 	uint8_t		sprite;
 	uint8_t		enemigos;
 	int32_t		x, y, direccion;
-	uint8_t		offset_x_a, offset_x_b, offset_y;
+	int8_t		offset_x_a, offset_x_b, offset_y;
+	uint32_t  periodo;
 } juego;
 
 juego juego_inicializar();

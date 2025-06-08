@@ -33,7 +33,7 @@ void jugador_actualizar(jugador* j, uint8_t* nunchuk_data) {
 	
 	if(boton_z && !j->bala) {
 		j->bala 	= TRUE;
-		j->bala_x =	j->posicion;
+		j->bala_x =	j->posicion - 1;
 		j->bala_y	= altura - 3;
 	}
 	
@@ -86,19 +86,7 @@ juego* j_g;
 
 void enemigos_dibujar();
 
-juego juego_inicializar() {
-	
-	__enable_irq();
-	
-	timer_inicializar(TIMER1);
-	
-	NVIC_ClearPendingIRQ(TIMER1_IRQn);
-	LPC_TIMER1->IR |= 1;	
-	
-	timer_iniciar_ciclos_ms(TIMER1, 1000);
-	
-	NVIC_SetPriority(TIMER1_IRQn, 1);
-	NVIC_EnableIRQ(TIMER1_IRQn);    
+juego juego_inicializar() {  
 	
 	jugador j = jugador_crear();
 	
@@ -111,8 +99,20 @@ juego juego_inicializar() {
 		n_enemigos,
 		1, 0,
 		1,
-		0, 0, 0
+		0, 0, 0, 1000
 	};
+	
+	__enable_irq();
+	
+	timer_inicializar(TIMER1);
+	
+	NVIC_ClearPendingIRQ(TIMER1_IRQn);
+	LPC_TIMER1->IR |= 1;	
+	
+	timer_iniciar_ciclos_ms(TIMER1, ret.periodo);
+	
+	NVIC_SetPriority(TIMER1_IRQn, 1);
+	NVIC_EnableIRQ(TIMER1_IRQn);  
 	
 	j_g = &ret;
 	
@@ -146,6 +146,39 @@ inline static bool_t dentro_2d(int32_t xa, int32_t ya, int32_t wa, int32_t ha, i
 	return dentro_1d(xa, wa, xb, wb) && dentro_1d(ya, ha, yb, hb);
 }	
 
+void TIMER1_IRQHandler(void) {
+	
+		enemigos_borrar();
+	
+		if(j_g->x + (n_enem_linea - j_g->offset_x_b) * 12 > max_x || j_g->x + j_g->offset_x_a * 12 <= 0) {
+			j_g->direccion = -j_g->direccion;
+			j_g->y+=2;
+		}
+	
+		j_g->x += j_g->direccion; 
+		j_g->sprite = !j_g->sprite;
+	
+		enemigos_dibujar();
+	
+		LPC_TIMER1->IR = 1;
+		NVIC_ClearPendingIRQ(TIMER1_IRQn);
+}
+
+void enemigo_eliminar_columnas() {
+		
+	bool_t 	eliminar_columna_izq = TRUE,
+					eliminar_columna_der = TRUE;
+	
+	for(uint8_t i = 0; i < n_enemigos / n_enem_linea; ++i) {
+		eliminar_columna_izq = eliminar_columna_izq && !enemigos[i*n_enem_linea + j_g->offset_x_a].vivo;
+		eliminar_columna_der = eliminar_columna_der && !enemigos[(i+1)*n_enem_linea - j_g->offset_x_b - 1].vivo;
+	}
+	
+	j_g->offset_x_a += eliminar_columna_izq;
+	j_g->offset_x_b += eliminar_columna_der;
+	
+}
+
 void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 	
 	jugador_actualizar(&j->jugador, nunchuk_data);
@@ -156,16 +189,27 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 						y = enemigos[i].y + j->y;
 		
 		if(enemigos[i].vivo && j->jugador.bala && dentro_2d(x, y, 8, 8, j->jugador.bala_x, j->jugador.bala_y, 4, 3)) {
+			
 				enemigo_borrar(&enemigos[i], j->sprite, j->x, j->y);
 				enemigos[i].vivo 	= FALSE;
 			  j->jugador.bala 	= FALSE;
+		
+				--j->enemigos;
+				j->periodo *= 0.91;
+		
+				timer_poner_contador_a_0(TIMER1);
+				timer_iniciar_ciclos_ms(TIMER1,j->periodo);
+		
 		}
 		
 	}
 	
+	enemigo_eliminar_columnas();
+	
 }
 
 void juego_dibujar(juego* j) {
+	
 	jugador_dibujar(&j->jugador);
 	if(j->jugador.bala)
 		bala_dibujar(&j->jugador);
@@ -175,24 +219,6 @@ void juego_borrar(juego* j) {
 	jugador_borrar(&j->jugador);
 	if(j->jugador.bala)
 		bala_borrar(&j->jugador);
-}
-
-void TIMER1_IRQHandler(void) {
-	
-		enemigos_borrar();
-	
-		if(j_g->x + n_enem_linea * 12 > max_x || j_g->x <= 0) {
-			j_g->direccion = -j_g->direccion;
-			++j_g->y;
-		}
-	
-		j_g->x += j_g->direccion; 
-		j_g->sprite = !j_g->sprite;
-	
-		enemigos_dibujar();
-	
-		LPC_TIMER1->IR = 1;
-		NVIC_ClearPendingIRQ(TIMER1_IRQn);
 }
 
 uint8_t samplear_rango(float in, float samples) {
