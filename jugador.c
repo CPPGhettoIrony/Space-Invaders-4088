@@ -11,8 +11,15 @@ uint8_t sprite_jugador[8] = {
 	0b11111111
 };
 
+uint8_t sprite_bala[8] = {
+	0b00100000,
+	0b01010000,
+	0b10001000,
+	0, 0, 0, 0, 0
+};
+
 jugador jugador_crear() {
-	jugador ret = {sprite_jugador, 3};
+	jugador ret = {sprite_jugador, sprite_bala, 3, 0, 0, FALSE};
 	return ret;
 }
 
@@ -23,6 +30,17 @@ void jugador_actualizar(jugador* j, uint8_t* nunchuk_data) {
 					boton_z 	= !(nunchuk_data[5] & 1u);
 	
 	int8_t	direccion = (joystick > 30) - (joystick < -30);
+	
+	if(boton_z && !j->bala) {
+		j->bala 	= TRUE;
+		j->bala_x =	j->posicion;
+		j->bala_y	= altura - 3;
+	}
+	
+	j->bala_y -= (j->bala)*2;
+	
+	if(j->bala && j->bala_y <= 0)
+		j->bala = FALSE;
 	
 	j->posicion += direccion * 2;
 	j->posicion = j->posicion * (j->posicion > 2 && j->posicion < max_x) + 3 * (j->posicion <=2) + (max_x - 1) * (j->posicion >= max_x);
@@ -103,12 +121,6 @@ juego juego_inicializar() {
 	return ret;
 }
 
-void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
-	
-	jugador_actualizar(&j->jugador, nunchuk_data);
-	
-}
-
 void enemigos_dibujar() {
 	for(uint8_t i = 0; i < n_enemigos; ++i)
 		if(enemigos[i].vivo)
@@ -121,12 +133,48 @@ void enemigos_borrar() {
 			enemigo_borrar(&enemigos[i], j_g->sprite, j_g->x, j_g->y);
 }
 
+
+inline static bool_t dentro_rango(int32_t x, int32_t a, int32_t b) {
+		return x >= a && x <= b;
+}
+
+inline static bool_t dentro_1d(int32_t xa, int32_t wa, int32_t xb, int32_t wb) {
+		return dentro_rango(xa, xb, xb + wb) || dentro_rango(xa + wa, xb, xb + wb);
+}
+
+inline static bool_t dentro_2d(int32_t xa, int32_t ya, int32_t wa, int32_t ha, int32_t xb, int32_t yb, int32_t wb, int32_t hb) {
+	return dentro_1d(xa, wa, xb, wb) && dentro_1d(ya, ha, yb, hb);
+}	
+
+void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
+	
+	jugador_actualizar(&j->jugador, nunchuk_data);
+	
+	for(uint8_t i = 0; i < n_enemigos; ++i) {
+		
+		int32_t x = enemigos[i].x + j->x,
+						y = enemigos[i].y + j->y;
+		
+		if(enemigos[i].vivo && j->jugador.bala && dentro_2d(x, y, 8, 8, j->jugador.bala_x, j->jugador.bala_y, 4, 3)) {
+				enemigo_borrar(&enemigos[i], j->sprite, j->x, j->y);
+				enemigos[i].vivo 	= FALSE;
+			  j->jugador.bala 	= FALSE;
+		}
+		
+	}
+	
+}
+
 void juego_dibujar(juego* j) {
 	jugador_dibujar(&j->jugador);
+	if(j->jugador.bala)
+		bala_dibujar(&j->jugador);
 }
 
 void juego_borrar(juego* j) {
 	jugador_borrar(&j->jugador);
+	if(j->jugador.bala)
+		bala_borrar(&j->jugador);
 }
 
 void TIMER1_IRQHandler(void) {

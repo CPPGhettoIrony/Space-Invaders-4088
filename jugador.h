@@ -8,8 +8,9 @@
 #define max_x		168
 
 typedef struct {
-	uint8_t*	sprite;
-	int32_t  	posicion;
+	uint8_t		*sprite, *spr_bala;
+	int32_t  	posicion, bala_x, bala_y;
+	bool_t		bala;
 } jugador;
 
 jugador jugador_crear();
@@ -22,6 +23,14 @@ inline static void jugador_dibujar(jugador* j) {
 
 inline static void jugador_borrar(jugador* j) {
 	dibujar_sprite(j->sprite, j->posicion, altura, NEGRO);
+}
+
+inline static void bala_dibujar(jugador* j) {
+	dibujar_sprite(j->spr_bala, j->bala_x, j->bala_y, BLANCO);
+}
+
+inline static void bala_borrar(jugador* j) {
+	dibujar_sprite(j->spr_bala, j->bala_x, j->bala_y, NEGRO);
 }
 
 #define n_enem_linea	12
