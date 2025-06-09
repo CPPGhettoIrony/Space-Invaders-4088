@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "jugador.h"
 
 uint8_t sprite_jugador[8] = {
@@ -68,6 +69,12 @@ uint8_t sprite_enemigo_b[8] = {
 	0b11000011
 };
 
+uint8_t sprite_enemigo_bala[8] = {
+	0b10100000,
+	0b01000000,
+	0,0,0,0,0,0
+};
+
 enemigo enemigos[n_enemigos];
 
 enemigo enemigo_crear(int32_t x, int32_t y) {
@@ -75,7 +82,9 @@ enemigo enemigo_crear(int32_t x, int32_t y) {
 	enemigo ret = {
 		{sprite_enemigo_a, sprite_enemigo_b}, 
 		x, y,
-		TRUE
+		TRUE,
+		0, 0,
+		FALSE
 	};
 	
 	return ret;
@@ -99,7 +108,7 @@ juego juego_inicializar() {
 		1, 0,
 		1,
 		0, 0, 0, 1000,
-		FALSE
+		FALSE, 0, 4
 	};
 	
 	__enable_irq();
@@ -150,8 +159,6 @@ void TIMER1_IRQHandler(void) {
 	
 		enemigos_borrar();
 	
-		
-	
 		if(j_g->x + (n_enem_linea - j_g->offset_x_b) * 12 > max_x || j_g->x + j_g->offset_x_a * 12 <= 0) {
 			j_g->direccion = -j_g->direccion;
 			j_g->y+=2;
@@ -159,10 +166,33 @@ void TIMER1_IRQHandler(void) {
 		
 		j_g->x += j_g->direccion; 
 		j_g->sprite = !j_g->sprite;
-	
+		
+		uint8_t idm = rand()%n_enemigos, id = 0;
+		
+		if(j_g->balas < j_g->max_balas) {
+			
+			for(; id < n_enemigos; ++id)			
+				if(id == idm) {
+					
+					if(!enemigos[id].vivo || enemigos[id].bala) {
+						++idm;
+						continue;
+					}
+					
+					enemigos[id].bala = TRUE;
+					enemigos[id].bala_x = enemigos[id].x + j_g->x + 4;
+					enemigos[id].bala_y = enemigos[id].y + j_g->y + 8;
+			
+					++j_g->balas;
+					break;
+					
+				}
+			
+		}
+		
 		enemigos_dibujar();
 		
-		if(!j_g->game_over && j_g->y + (n_enemigos/n_enem_linea - j_g->offset_y) * 12 > altura)
+		if(j_g->enemigos > 0 && !j_g->game_over && j_g->y + (n_enemigos/n_enem_linea - j_g->offset_y) * 12 > altura)
 			j_g->game_over = TRUE;
 	
 		LPC_TIMER1->IR = 1;
@@ -196,6 +226,14 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 	
 	for(uint8_t i = 0; i < n_enemigos; ++i) {
 		
+		if(enemigos[i].bala) {
+			++enemigos[i].bala_y;
+			if(enemigos[i].bala_y >= GLCD_TAMANO_Y) {
+				--j->balas;
+				enemigos[i].bala = FALSE;
+			}
+		}
+		
 		int32_t x = enemigos[i].x + j->x,
 						y = enemigos[i].y + j->y;
 		
@@ -224,12 +262,23 @@ void juego_dibujar(juego* j) {
 	jugador_dibujar(&j->jugador);
 	if(j->jugador.bala)
 		bala_dibujar(&j->jugador);
+	
+	for(uint8_t i = 0; i < n_enemigos; ++i) 
+		if(enemigos[i].bala)
+			dibujar_sprite(sprite_enemigo_bala, enemigos[i].bala_x, enemigos[i].bala_y, AMARILLO);
+	
 }
 
 void juego_borrar(juego* j) {
+	
 	jugador_borrar(&j->jugador);
 	if(j->jugador.bala)
 		bala_borrar(&j->jugador);
+	
+	for(uint8_t i = 0; i < n_enemigos; ++i) 
+		if(enemigos[i].bala)
+			dibujar_sprite(sprite_enemigo_bala, enemigos[i].bala_x, enemigos[i].bala_y, NEGRO);
+	
 }
 
 uint8_t samplear_rango(float in, float samples) {

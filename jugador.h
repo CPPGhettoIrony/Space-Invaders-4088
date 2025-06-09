@@ -40,6 +40,8 @@ typedef struct{
 	uint8_t*	sprites[2];
 	int32_t		x, y;
 	bool_t		vivo;
+	int32_t		bala_x, bala_y;
+	bool_t		bala;
 } enemigo;
 
 enemigo enemigo_crear(int32_t x, int32_t y);
@@ -60,6 +62,7 @@ typedef struct {
 	int8_t		offset_x_a, offset_x_b, offset_y;
 	uint32_t  periodo;
 	bool_t		game_over;
+	uint8_t		balas, max_balas;
 } juego;
 
 juego juego_inicializar();
