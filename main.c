@@ -28,7 +28,7 @@ int main(){
 		
 		dibujar_panel();
 		
-		if(j.game_over) {
+		if(j.vidas == 0 && j.game_over) {
 			glcd_xprintf(GLCD_TAMANO_X/2 - strlen(game_over_str)*16, GLCD_TAMANO_Y/2 - 16, ROJO, NEGRO, FUENTE16X32, "%s", game_over_str);
 			continue;
 		}

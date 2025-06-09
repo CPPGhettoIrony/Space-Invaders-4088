@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "jugador.h"
 
+juego* j_g;
+
 uint8_t sprite_jugador[8] = {
 	0b00011000,
 	0b00011000,
@@ -31,7 +33,7 @@ void jugador_actualizar(jugador* j, uint8_t* nunchuk_data) {
 	
 	int8_t	direccion = (joystick > 30) - (joystick < -30);
 	
-	if(boton_z && !j->bala) {
+	if(boton_z && !j->bala && !j_g->game_over) {
 		j->bala 	= TRUE;
 		j->bala_x =	j->posicion - 1;
 		j->bala_y	= altura - 3;
@@ -90,8 +92,6 @@ enemigo enemigo_crear(int32_t x, int32_t y) {
 	return ret;
 }
 
-juego* j_g;
-
 void enemigos_dibujar();
 
 juego juego_inicializar() {  
@@ -102,6 +102,8 @@ juego juego_inicializar() {
 		enemigos[i] = enemigo_crear(4 + (i % n_enem_linea) * 12 , 4 + (i / n_enem_linea) * 12);
 	
 	juego ret = {
+		0,
+		3,
 		0,
 		j, 
 		0, 
@@ -156,15 +158,17 @@ inline static bool_t dentro_2d(int32_t xa, int32_t ya, int32_t wa, int32_t ha, i
 	return dentro_1d(xa, wa, xb, wb) && dentro_1d(ya, ha, yb, hb);
 }	
 
+void matar_jugador(juego* j);
+
 void TIMER1_IRQHandler(void) {
 	
 		LPC_TIMER1->IR = 1;
 		NVIC_ClearPendingIRQ(TIMER1_IRQn);
 	
-		if(j_g->enemigos == 0)
-			return;
-	
 		enemigos_borrar();
+	
+		if(j_g->enemigos == 0 || j_g->game_over)
+			return;
 	
 		if(j_g->x + (n_enem_linea - j_g->offset_x_b) * 12 > max_x || j_g->x + j_g->offset_x_a * 12 <= 0) {
 			j_g->direccion = -j_g->direccion;
@@ -200,7 +204,7 @@ void TIMER1_IRQHandler(void) {
 		enemigos_dibujar();
 		
 		if(j_g->enemigos > 0 && !j_g->game_over && j_g->y + (n_enemigos/n_enem_linea - j_g->offset_y) * 12 > altura)
-			j_g->game_over = TRUE;
+			matar_jugador(j_g);
 }
 
 void enemigo_eliminar_columnas() {
@@ -224,11 +228,10 @@ void enemigo_eliminar_columnas() {
 	
 }
 
-void avanzar_nivel(juego* j) {
-
+void resetear_nivel(juego* j) {
 	
 	jugador_dibujar(&j->jugador);
-	timer_retardo_ms(TIMER0, 1000);
+	timer_retardo_ms(TIMER0, 3000);
 	
 	timer_poner_contador_a_0(TIMER1);
 	timer_iniciar_ciclos_ms(TIMER1, 1000);
@@ -242,6 +245,7 @@ void avanzar_nivel(juego* j) {
 	
 	j->sprite 					= 0;
 	j->enemigos 				= n_enemigos;
+	j->jugador.bala			= FALSE;
 	j->x								= 1;
 	j->y								= 0;
 	j->direccion				= 1;
@@ -251,8 +255,24 @@ void avanzar_nivel(juego* j) {
 	j->periodo					= 1000;
 	j->balas						= 0;
 	
+}
+
+void avanzar_nivel(juego* j) {
+
+	resetear_nivel(j);
+	
 	++j->nivel;
 	++j->max_balas;
+	
+}
+
+void matar_jugador(juego* j) {
+
+	j->game_over = TRUE;
+	resetear_nivel(j);
+	
+	--j->vidas;
+	j->game_over = j->vidas == 0;
 	
 }
 
@@ -268,7 +288,7 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 		if(enemigos[i].bala) {
 			
 			if(dentro_2d(enemigos[i].bala_x, enemigos[i].bala_y, 3, 2, j->jugador.posicion, altura, 8, 8))
-				j->game_over = TRUE;
+				matar_jugador(j);
 			
 			++enemigos[i].bala_y;
 			if(enemigos[i].bala_y >= GLCD_TAMANO_Y) {
@@ -289,6 +309,8 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 		
 				--j->enemigos;
 				j->periodo *= (0.92 - (float)j->nivel * 0.01);
+		
+				j->puntuacion += 50;
 		
 				timer_poner_contador_a_0(TIMER1);
 				timer_iniciar_ciclos_ms(TIMER1,j->periodo);
@@ -357,5 +379,7 @@ void secuencia_inicial() {
 }
 
 void dibujar_panel() {
-	glcd_xprintf((max_x + 10) * TAM_PIXEL + 8, 8, BLANCO, NEGRO, FUENTE8X16, "Nivel: %u", j_g->nivel);
+	glcd_xprintf((max_x + 10) * TAM_PIXEL + 8,  8, BLANCO, NEGRO, FUENTE8X16, "Vidas: %u", 	j_g->vidas);
+	glcd_xprintf((max_x + 10) * TAM_PIXEL + 8, 28, BLANCO, NEGRO, FUENTE8X16, "Nivel: %u", 	j_g->nivel);
+	glcd_xprintf((max_x + 10) * TAM_PIXEL + 8, 98, BLANCO, NEGRO, FUENTE8X16, "Puntos: %u", j_g->puntuacion);
 }

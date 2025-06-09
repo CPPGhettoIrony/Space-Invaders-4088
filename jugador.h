@@ -56,6 +56,8 @@ inline static void enemigo_borrar(enemigo* e, uint8_t sprite, int32_t offset_x, 
 
 typedef struct {
 	uint8_t		nivel;
+	uint8_t		vidas;
+	uint32_t	puntuacion;
 	jugador		jugador;
 	uint8_t		sprite;
 	uint8_t		enemigos;
