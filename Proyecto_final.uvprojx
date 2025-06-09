@@ -419,6 +419,16 @@
               <FileType>5</FileType>
               <FilePath>.\jugador.h</FilePath>
             </File>
+            <File>
+              <FileName>sonido.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sonido.c</FilePath>
+            </File>
+            <File>
+              <FileName>sonido.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sonido.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

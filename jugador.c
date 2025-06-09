@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "sonido.h"
 #include "jugador.h"
 
 juego* j_g;
@@ -114,7 +115,7 @@ juego juego_inicializar() {
 		FALSE, 0, 4
 	};
 	
-	__enable_irq();
+	sonido_inicializar();
 	
 	timer_inicializar(TIMER1);
 	
@@ -361,9 +362,23 @@ uint8_t samplear_rango(float in, float samples) {
 
 void secuencia_inicial() {
 	
-	static const int32_t width =  GLCD_TAMANO_X - (max_x + 10) * TAM_PIXEL;
+	static const uint32_t melodia[8] = {
+		NOTE_D5, NOTE_F5, NOTE_A5, NOTE_C6,
+		NOTE_D6, NOTE_F6, NOTE_A6, NOTE_C7,
+	};
 	
-	for(int32_t x = (max_x + 10) * TAM_PIXEL; x <= GLCD_TAMANO_X; ++x)
+	uint32_t note = 0;
+	
+	static const int32_t offset	= (max_x + 10) * TAM_PIXEL;
+	static const int32_t width 	= GLCD_TAMANO_X - offset;
+	
+	for(int32_t x = offset; x <= GLCD_TAMANO_X; ++x) {
+	
+		int32_t i = x - offset;
+		
+		if(!(i % 2))
+			sonido_emitir_pitido(melodia[note++ % 8], 10);
+	
 		for(int32_t y = 0; y <= GLCD_TAMANO_Y; ++y) {
 			
 			float col_green 		= (float)(x - (max_x + 10) * TAM_PIXEL) / (float)width,
@@ -376,6 +391,7 @@ void secuencia_inicial() {
 			glcd_punto(x, y, green | intensity);
 			
 		}
+	}
 		
 }
 
