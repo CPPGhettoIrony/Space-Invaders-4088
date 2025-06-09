@@ -102,6 +102,7 @@ juego juego_inicializar() {
 		enemigos[i] = enemigo_crear(4 + (i % n_enem_linea) * 12 , 4 + (i / n_enem_linea) * 12);
 	
 	juego ret = {
+		0,
 		j, 
 		0, 
 		n_enemigos,
@@ -157,6 +158,12 @@ inline static bool_t dentro_2d(int32_t xa, int32_t ya, int32_t wa, int32_t ha, i
 
 void TIMER1_IRQHandler(void) {
 	
+		LPC_TIMER1->IR = 1;
+		NVIC_ClearPendingIRQ(TIMER1_IRQn);
+	
+		if(j_g->enemigos == 0)
+			return;
+	
 		enemigos_borrar();
 	
 		if(j_g->x + (n_enem_linea - j_g->offset_x_b) * 12 > max_x || j_g->x + j_g->offset_x_a * 12 <= 0) {
@@ -194,9 +201,6 @@ void TIMER1_IRQHandler(void) {
 		
 		if(j_g->enemigos > 0 && !j_g->game_over && j_g->y + (n_enemigos/n_enem_linea - j_g->offset_y) * 12 > altura)
 			j_g->game_over = TRUE;
-	
-		LPC_TIMER1->IR = 1;
-		NVIC_ClearPendingIRQ(TIMER1_IRQn);
 }
 
 void enemigo_eliminar_columnas() {
@@ -220,31 +224,71 @@ void enemigo_eliminar_columnas() {
 	
 }
 
+void avanzar_nivel(juego* j) {
+
+	
+	jugador_dibujar(&j->jugador);
+	timer_retardo_ms(TIMER0, 1000);
+	
+	timer_poner_contador_a_0(TIMER1);
+	timer_iniciar_ciclos_ms(TIMER1, 1000);
+	
+	for(uint8_t i = 0; i < n_enemigos; ++i) {
+		enemigos[i].x 		= 4 + (i % n_enem_linea) * 12;
+		enemigos[i].y 		= 4 + (i / n_enem_linea) * 12;
+		enemigos[i].vivo 	= TRUE;
+		enemigos[i].bala 	= FALSE;
+	}
+	
+	j->sprite 					= 0;
+	j->enemigos 				= n_enemigos;
+	j->x								= 1;
+	j->y								= 0;
+	j->direccion				= 1;
+	j->offset_x_a				= 0;
+	j->offset_x_b				= 0;
+	j->offset_y					= 0;
+	j->periodo					= 1000;
+	j->balas						= 0;
+	
+	++j->nivel;
+	++j->max_balas;
+	
+}
+
 void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 	
 	jugador_actualizar(&j->jugador, nunchuk_data);
 	
+	if(j->enemigos == 0)
+		avanzar_nivel(j);
+	
 	for(uint8_t i = 0; i < n_enemigos; ++i) {
 		
 		if(enemigos[i].bala) {
+			
+			if(dentro_2d(enemigos[i].bala_x, enemigos[i].bala_y, 3, 2, j->jugador.posicion, altura, 8, 8))
+				j->game_over = TRUE;
+			
 			++enemigos[i].bala_y;
 			if(enemigos[i].bala_y >= GLCD_TAMANO_Y) {
 				--j->balas;
 				enemigos[i].bala = FALSE;
 			}
+			
 		}
 		
 		int32_t x = enemigos[i].x + j->x,
 						y = enemigos[i].y + j->y;
 		
-		if(enemigos[i].vivo && j->jugador.bala && dentro_2d(x, y, 8, 8, j->jugador.bala_x, j->jugador.bala_y, 4, 3)) {
+		if(enemigos[i].vivo && j->jugador.bala && dentro_2d(j->jugador.bala_x, j->jugador.bala_y, 3, 2, x, y, 8, 8)) {
 			
 				enemigo_borrar(&enemigos[i], j->sprite, j->x, j->y);
 				enemigos[i].vivo 	= FALSE;
 			  j->jugador.bala 	= FALSE;
 		
 				--j->enemigos;
-				j->periodo *= 0.91;
+				j->periodo *= (0.92 - (float)j->nivel * 0.01);
 		
 				timer_poner_contador_a_0(TIMER1);
 				timer_iniciar_ciclos_ms(TIMER1,j->periodo);
@@ -292,7 +336,7 @@ uint8_t samplear_rango(float in, float samples) {
 	
 }
 
-void dibujar_panel() {
+void secuencia_inicial() {
 	
 	static const int32_t width =  GLCD_TAMANO_X - (max_x + 10) * TAM_PIXEL;
 	
@@ -310,4 +354,8 @@ void dibujar_panel() {
 			
 		}
 		
+}
+
+void dibujar_panel() {
+	glcd_xprintf((max_x + 10) * TAM_PIXEL + 8, 8, BLANCO, NEGRO, FUENTE8X16, "Nivel: %u", j_g->nivel);
 }

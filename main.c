@@ -20,11 +20,13 @@ int main(){
 	
 	glcd_inicializar();
 	
-	dibujar_panel();
+	secuencia_inicial();
 	
 	juego j = juego_inicializar();
 	
 	while(1){
+		
+		dibujar_panel();
 		
 		if(j.game_over) {
 			glcd_xprintf(GLCD_TAMANO_X/2 - strlen(game_over_str)*16, GLCD_TAMANO_Y/2 - 16, ROJO, NEGRO, FUENTE16X32, "%s", game_over_str);

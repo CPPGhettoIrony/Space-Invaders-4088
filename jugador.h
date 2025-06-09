@@ -55,6 +55,7 @@ inline static void enemigo_borrar(enemigo* e, uint8_t sprite, int32_t offset_x, 
 }
 
 typedef struct {
+	uint8_t		nivel;
 	jugador		jugador;
 	uint8_t		sprite;
 	uint8_t		enemigos;
@@ -72,6 +73,8 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data);
 void juego_dibujar(juego* j);
 
 void juego_borrar(juego* j);
+
+void secuencia_inicial();
 
 void dibujar_panel();
 
