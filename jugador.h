@@ -3,6 +3,7 @@
 
 #include "sprites.h"
 #include "nunchuk.h"
+#include "sonido.h"
 
 #define altura 	120
 #define max_x		168
@@ -76,8 +77,59 @@ void juego_dibujar(juego* j);
 
 void juego_borrar(juego* j);
 
+void juego_resetear(juego* j);
+
 void secuencia_inicial();
 
 void dibujar_panel();
+
+inline static void sonido_enemigo_bala() {
+	sonido_emitir_pitido(900,   8);
+	sonido_emitir_pitido(1000, 10);
+	sonido_emitir_pitido(1200, 15);
+}
+
+inline static void sonido_jugador_bala() {
+	sonido_emitir_pitido(600, 15);
+	sonido_emitir_pitido(550, 10);
+	sonido_emitir_pitido(450, 8);
+}
+
+inline static void sonido_perder_vida() {
+	sonido_emitir_pitido(NOTE_C3,  100);
+	sonido_emitir_pitido(NOTE_G2,  100);
+	sonido_emitir_pitido(NOTE_FS2, 100);	
+}
+
+inline static void sonido_avanzar_nivel() {
+	sonido_emitir_pitido(NOTE_A5,	 110);
+	sonido_emitir_pitido(NOTE_F5,	 110);
+	sonido_emitir_pitido(NOTE_C6,	 110);
+	sonido_emitir_pitido(NOTE_F6,	 110);
+}
+
+inline static void sonido_game_over() {
+	
+	sonido_emitir_pitido(NOTE_C3,  250);
+	timer_retardo_ms(TIMER0, 50);
+	
+	sonido_emitir_pitido(NOTE_C3,  300);
+	sonido_emitir_pitido(NOTE_C3,  100);
+	
+	sonido_emitir_pitido(NOTE_C3,  250);
+	timer_retardo_ms(TIMER0, 50);
+	
+	sonido_emitir_pitido(NOTE_DS3, 200);
+	sonido_emitir_pitido(NOTE_D3,  100);
+	
+	sonido_emitir_pitido(NOTE_D3,  200);
+	sonido_emitir_pitido(NOTE_C3,  100);
+	
+	sonido_emitir_pitido(NOTE_C3,  200);
+	sonido_emitir_pitido(NOTE_B2,  100);
+	
+	sonido_emitir_pitido(NOTE_C3,  300);
+
+}
 
 #endif

@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include "sonido.h"
 #include "jugador.h"
 
 juego* j_g;
@@ -35,6 +34,9 @@ void jugador_actualizar(jugador* j, uint8_t* nunchuk_data) {
 	int8_t	direccion = (joystick > 30) - (joystick < -30);
 	
 	if(boton_z && !j->bala && !j_g->game_over) {
+		
+		sonido_jugador_bala();
+		
 		j->bala 	= TRUE;
 		j->bala_x =	j->posicion - 1;
 		j->bala_y	= altura - 3;
@@ -115,7 +117,7 @@ juego juego_inicializar() {
 		FALSE, 0, 4
 	};
 	
-	sonido_inicializar();
+	__enable_irq();
 	
 	timer_inicializar(TIMER1);
 	
@@ -181,6 +183,8 @@ void TIMER1_IRQHandler(void) {
 		
 		uint8_t idm = rand()%n_enemigos, id = 0;
 		
+		enemigos_dibujar();
+		
 		if(j_g->balas < j_g->max_balas) {
 			
 			for(; id < n_enemigos; ++id)			
@@ -190,6 +194,8 @@ void TIMER1_IRQHandler(void) {
 						++idm;
 						continue;
 					}
+					
+					sonido_enemigo_bala();
 					
 					enemigos[id].bala = TRUE;
 					enemigos[id].bala_x = enemigos[id].x + j_g->x + 4;
@@ -201,8 +207,6 @@ void TIMER1_IRQHandler(void) {
 				}
 			
 		}
-		
-		enemigos_dibujar();
 		
 		if(j_g->enemigos > 0 && !j_g->game_over && j_g->y + (n_enemigos/n_enem_linea - j_g->offset_y) * 12 > altura)
 			matar_jugador(j_g);
@@ -260,7 +264,11 @@ void resetear_nivel(juego* j) {
 
 void avanzar_nivel(juego* j) {
 
+	sonido_avanzar_nivel();
+	
 	resetear_nivel(j);
+	
+	enemigos_dibujar();
 	
 	++j->nivel;
 	++j->max_balas;
@@ -270,11 +278,20 @@ void avanzar_nivel(juego* j) {
 void matar_jugador(juego* j) {
 
 	j->game_over = TRUE;
+	
 	enemigos_borrar();
+	
+	sonido_perder_vida();
+	
 	resetear_nivel(j);
 	
 	--j->vidas;
 	j->game_over = j->vidas == 0;
+	
+	if(!j->game_over) {
+		enemigos_dibujar();
+		return;
+	}
 	
 }
 
@@ -306,6 +323,7 @@ void juego_actualizar(juego* j, uint8_t* nunchuk_data) {
 		if(enemigos[i].vivo && j->jugador.bala && dentro_2d(j->jugador.bala_x, j->jugador.bala_y, 3, 2, x, y, 8, 8)) {
 			
 				enemigo_borrar(&enemigos[i], j->sprite, j->x, j->y);
+		
 				enemigos[i].vivo 	= FALSE;
 			  j->jugador.bala 	= FALSE;
 		
@@ -362,9 +380,19 @@ uint8_t samplear_rango(float in, float samples) {
 
 void secuencia_inicial() {
 	
-	static const uint32_t melodia[8] = {
-		NOTE_D5, NOTE_F5, NOTE_A5, NOTE_C6,
-		NOTE_D6, NOTE_F6, NOTE_A6, NOTE_C7,
+	static const uint32_t melodia[48] = {
+		NOTE_D5, NOTE_F5,  NOTE_A5, NOTE_C6,
+		NOTE_D6, NOTE_F6,  NOTE_A6, NOTE_C7,
+		NOTE_D5, NOTE_F5,  NOTE_A5, NOTE_C6,
+		NOTE_D6, NOTE_F6,  NOTE_A6, NOTE_C7,
+		NOTE_D5, NOTE_F5,  NOTE_A5, NOTE_C6,
+		NOTE_D6, NOTE_F6,  NOTE_A6, NOTE_C7,
+		NOTE_D5, NOTE_FS5, NOTE_A5, NOTE_CS6,
+		NOTE_D6, NOTE_FS6, NOTE_A6, NOTE_CS7,
+		NOTE_D5, NOTE_FS5, NOTE_A5, NOTE_CS6,
+		NOTE_D6, NOTE_FS6, NOTE_A6, NOTE_CS7,
+		NOTE_D5, NOTE_FS5, NOTE_A5, NOTE_CS6,
+		NOTE_D6, NOTE_FS6, NOTE_A6, NOTE_CS7,
 	};
 	
 	uint32_t note = 0;
@@ -376,8 +404,8 @@ void secuencia_inicial() {
 	
 		int32_t i = x - offset;
 		
-		if(!(i % 2))
-			sonido_emitir_pitido(melodia[note++ % 8], 10);
+		if(!(i % 3))
+			sonido_emitir_pitido(melodia[note++ % 48], 30);
 	
 		for(int32_t y = 0; y <= GLCD_TAMANO_Y; ++y) {
 			
