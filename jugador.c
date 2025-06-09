@@ -269,6 +269,7 @@ void avanzar_nivel(juego* j) {
 void matar_jugador(juego* j) {
 
 	j->game_over = TRUE;
+	enemigos_borrar();
 	resetear_nivel(j);
 	
 	--j->vidas;
