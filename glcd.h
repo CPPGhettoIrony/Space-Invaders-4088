@@ -1,4 +1,7 @@
 /*******************************************************************************
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \brief   Funciones de manejo del LCD de 4.3" desde la tarjeta Embedded Artist
  *          Developer's Kit.
  */

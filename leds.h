@@ -1,4 +1,7 @@
 /*******************************************************************************
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \file    leds.h
  *
  * \brief   Funciones para manejar cuatro de los LEDs de la tarjeta Embedded

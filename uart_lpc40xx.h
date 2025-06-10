@@ -1,4 +1,7 @@
 /***************************************************************************//**
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \file    uart_lpc40xx.h
  *
  * \brief   Funciones de manejo de las UARTs del LPC40xx.

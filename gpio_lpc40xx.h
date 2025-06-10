@@ -1,4 +1,7 @@
 /*******************************************************************************
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \file    gpio_lpc40xx.h
  *
  * \brief   Constantes y funciones para manejar los puertos E/S digital del

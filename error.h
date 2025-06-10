@@ -1,4 +1,7 @@
 /*******************************************************************************
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \file    error.h
  *
  * \brief   Tratamiento de errores.

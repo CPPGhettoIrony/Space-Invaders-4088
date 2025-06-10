@@ -1,4 +1,7 @@
 /*******************************************************************************
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \file    adc_lpc40xx.h
  *
  * \brief   Funciones de manejo del ADC del LPC40xx.

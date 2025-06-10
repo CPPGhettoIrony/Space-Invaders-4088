@@ -7,6 +7,7 @@ Section Cross References
     main.o(.text) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     main.o(.text.main) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     main.o(.text.main) refers to main.o(.rodata.str1.1) for .L.str
+    main.o(.text.main) refers to timer_lpc40xx.o(.text.timer_inicializar) for timer_inicializar
     main.o(.text.main) refers to nunchuk.o(.text.nunchuk_inicializar) for nunchuk_inicializar
     main.o(.text.main) refers to nunchuk.o(.text.nunchuk_leer) for nunchuk_leer
     main.o(.text.main) refers to glcd.o(.text.glcd_inicializar) for glcd_inicializar
@@ -30,7 +31,6 @@ Section Cross References
     main.o(.rodata.str1.1) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     main.o(.ARM.use_no_argv) refers (Special) to use_no_semi_2.o(.text) for __use_no_semihosting
     nunchuk.o(.text.nunchuk_inicializar) refers to i2c_lpc40xx.o(.text.i2c_inicializar) for i2c_inicializar
-    nunchuk.o(.text.nunchuk_inicializar) refers to timer_lpc40xx.o(.text.timer_inicializar) for timer_inicializar
     nunchuk.o(.text.nunchuk_inicializar) refers to i2c_lpc40xx.o(.text.i2c_start) for i2c_start
     nunchuk.o(.text.nunchuk_inicializar) refers to i2c_lpc40xx.o(.text.i2c_transmitir_byte) for i2c_transmitir_byte
     nunchuk.o(.text.nunchuk_inicializar) refers to i2c_lpc40xx.o(.text.i2c_stop) for i2c_stop
@@ -112,8 +112,8 @@ Section Cross References
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.text.__NVIC_ClearPendingIRQ) for __NVIC_ClearPendingIRQ
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.text.enemigos_borrar) for enemigos_borrar
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.bss.j_g) for j_g
-    jugador.o(.text.TIMER1_IRQHandler) refers to rand.o(.emb_text) for rand
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.text.enemigos_dibujar) for enemigos_dibujar
+    jugador.o(.text.TIMER1_IRQHandler) refers to rand.o(.emb_text) for rand
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.bss.enemigos) for enemigos
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.text.sonido_enemigo_bala) for sonido_enemigo_bala
     jugador.o(.text.TIMER1_IRQHandler) refers to jugador.o(.text.matar_jugador) for matar_jugador
@@ -1467,21 +1467,21 @@ Image Symbol Table
     [Anonymous Symbol]                       0x00003564   Section        0  i2c_lpc40xx.o(.text.i2c_transmitir_byte)
     [Anonymous Symbol]                       0x000035e0   Section        0  iocon_lpc40xx.o(.text.iocon_configurar_pin)
     [Anonymous Symbol]                       0x00003768   Section        0  jugador.o(.text.juego_actualizar)
-    [Anonymous Symbol]                       0x000039c8   Section        0  jugador.o(.text.juego_borrar)
-    [Anonymous Symbol]                       0x00003a4c   Section        0  jugador.o(.text.juego_dibujar)
-    [Anonymous Symbol]                       0x00003ad0   Section        0  jugador.o(.text.juego_inicializar)
-    [Anonymous Symbol]                       0x00003c10   Section        0  jugador.o(.text.jugador_actualizar)
+    [Anonymous Symbol]                       0x000039d8   Section        0  jugador.o(.text.juego_borrar)
+    [Anonymous Symbol]                       0x00003a5c   Section        0  jugador.o(.text.juego_dibujar)
+    [Anonymous Symbol]                       0x00003ae0   Section        0  jugador.o(.text.juego_inicializar)
+    [Anonymous Symbol]                       0x00003c20   Section        0  jugador.o(.text.jugador_actualizar)
     jugador_borrar                           0x00003d29   Thumb Code    24  jugador.o(.text.jugador_borrar)
     [Anonymous Symbol]                       0x00003d28   Section        0  jugador.o(.text.jugador_borrar)
     [Anonymous Symbol]                       0x00003d40   Section        0  jugador.o(.text.jugador_crear)
     jugador_dibujar                          0x00003d71   Thumb Code    26  jugador.o(.text.jugador_dibujar)
     [Anonymous Symbol]                       0x00003d70   Section        0  jugador.o(.text.jugador_dibujar)
     [Anonymous Symbol]                       0x00003d8c   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x00003e38   Section        0  jugador.o(.text.matar_jugador)
-    [Anonymous Symbol]                       0x00003e80   Section        0  nunchuk.o(.text.nunchuk_inicializar)
-    [Anonymous Symbol]                       0x00003f94   Section        0  nunchuk.o(.text.nunchuk_leer)
-    [Anonymous Symbol]                       0x00004064   Section        0  error.o(.text.parar_con_error)
-    [Anonymous Symbol]                       0x00004124   Section        0  jugador.o(.text.resetear_nivel)
+    [Anonymous Symbol]                       0x00003e40   Section        0  jugador.o(.text.matar_jugador)
+    [Anonymous Symbol]                       0x00003e88   Section        0  nunchuk.o(.text.nunchuk_inicializar)
+    [Anonymous Symbol]                       0x00003f98   Section        0  nunchuk.o(.text.nunchuk_leer)
+    [Anonymous Symbol]                       0x00004068   Section        0  error.o(.text.parar_con_error)
+    [Anonymous Symbol]                       0x00004128   Section        0  jugador.o(.text.resetear_nivel)
     [Anonymous Symbol]                       0x00004220   Section        0  jugador.o(.text.samplear_rango)
     [Anonymous Symbol]                       0x000042c8   Section        0  sdram.o(.text.sdram_inicializar)
     sdram_test                               0x00004809   Thumb Code   108  sdram.o(.text.sdram_test)
@@ -1894,18 +1894,18 @@ Image Symbol Table
     i2c_stop                                 0x00003509   Thumb Code    80  i2c_lpc40xx.o(.text.i2c_stop)
     i2c_transmitir_byte                      0x00003565   Thumb Code   104  i2c_lpc40xx.o(.text.i2c_transmitir_byte)
     iocon_configurar_pin                     0x000035e1   Thumb Code   264  iocon_lpc40xx.o(.text.iocon_configurar_pin)
-    juego_actualizar                         0x00003769   Thumb Code   592  jugador.o(.text.juego_actualizar)
-    juego_borrar                             0x000039c9   Thumb Code   130  jugador.o(.text.juego_borrar)
-    juego_dibujar                            0x00003a4d   Thumb Code   132  jugador.o(.text.juego_dibujar)
-    juego_inicializar                        0x00003ad1   Thumb Code   318  jugador.o(.text.juego_inicializar)
-    jugador_actualizar                       0x00003c11   Thumb Code   278  jugador.o(.text.jugador_actualizar)
+    juego_actualizar                         0x00003769   Thumb Code   608  jugador.o(.text.juego_actualizar)
+    juego_borrar                             0x000039d9   Thumb Code   130  jugador.o(.text.juego_borrar)
+    juego_dibujar                            0x00003a5d   Thumb Code   132  jugador.o(.text.juego_dibujar)
+    juego_inicializar                        0x00003ae1   Thumb Code   318  jugador.o(.text.juego_inicializar)
+    jugador_actualizar                       0x00003c21   Thumb Code   262  jugador.o(.text.jugador_actualizar)
     jugador_crear                            0x00003d41   Thumb Code    46  jugador.o(.text.jugador_crear)
-    main                                     0x00003d8d   Thumb Code   172  main.o(.text.main)
-    matar_jugador                            0x00003e39   Thumb Code    72  jugador.o(.text.matar_jugador)
-    nunchuk_inicializar                      0x00003e81   Thumb Code   276  nunchuk.o(.text.nunchuk_inicializar)
-    nunchuk_leer                             0x00003f95   Thumb Code   208  nunchuk.o(.text.nunchuk_leer)
-    parar_con_error                          0x00004065   Thumb Code   136  error.o(.text.parar_con_error)
-    resetear_nivel                           0x00004125   Thumb Code   248  jugador.o(.text.resetear_nivel)
+    main                                     0x00003d8d   Thumb Code   180  main.o(.text.main)
+    matar_jugador                            0x00003e41   Thumb Code    72  jugador.o(.text.matar_jugador)
+    nunchuk_inicializar                      0x00003e89   Thumb Code   270  nunchuk.o(.text.nunchuk_inicializar)
+    nunchuk_leer                             0x00003f99   Thumb Code   208  nunchuk.o(.text.nunchuk_leer)
+    parar_con_error                          0x00004069   Thumb Code   136  error.o(.text.parar_con_error)
+    resetear_nivel                           0x00004129   Thumb Code   248  jugador.o(.text.resetear_nivel)
     samplear_rango                           0x00004221   Thumb Code   160  jugador.o(.text.samplear_rango)
     sdram_inicializar                        0x000042c9   Thumb Code  1342  sdram.o(.text.sdram_inicializar)
     secuencia_inicial                        0x00004875   Thumb Code   276  jugador.o(.text.secuencia_inicial)
@@ -2189,26 +2189,26 @@ Memory Map of the image
     0x00003508   0x00003508   0x0000005c   Code   RO          320    .text.i2c_stop      lpc40xx_i2c.lib(i2c_lpc40xx.o)
     0x00003564   0x00003564   0x0000007c   Code   RO          322    .text.i2c_transmitir_byte  lpc40xx_i2c.lib(i2c_lpc40xx.o)
     0x000035e0   0x000035e0   0x00000188   Code   RO          371    .text.iocon_configurar_pin  lpc40xx_base.lib(iocon_lpc40xx.o)
-    0x00003768   0x00003768   0x00000260   Code   RO           71    .text.juego_actualizar  jugador.o
-    0x000039c8   0x000039c8   0x00000082   Code   RO           79    .text.juego_borrar  jugador.o
-    0x00003a4a   0x00003a4a   0x00000002   PAD
-    0x00003a4c   0x00003a4c   0x00000084   Code   RO           75    .text.juego_dibujar  jugador.o
-    0x00003ad0   0x00003ad0   0x0000013e   Code   RO           43    .text.juego_inicializar  jugador.o
-    0x00003c0e   0x00003c0e   0x00000002   PAD
-    0x00003c10   0x00003c10   0x00000116   Code   RO           39    .text.jugador_actualizar  jugador.o
+    0x00003768   0x00003768   0x00000270   Code   RO           71    .text.juego_actualizar  jugador.o
+    0x000039d8   0x000039d8   0x00000082   Code   RO           79    .text.juego_borrar  jugador.o
+    0x00003a5a   0x00003a5a   0x00000002   PAD
+    0x00003a5c   0x00003a5c   0x00000084   Code   RO           75    .text.juego_dibujar  jugador.o
+    0x00003ae0   0x00003ae0   0x0000013e   Code   RO           43    .text.juego_inicializar  jugador.o
+    0x00003c1e   0x00003c1e   0x00000002   PAD
+    0x00003c20   0x00003c20   0x00000106   Code   RO           39    .text.jugador_actualizar  jugador.o
     0x00003d26   0x00003d26   0x00000002   PAD
     0x00003d28   0x00003d28   0x00000018   Code   RO           81    .text.jugador_borrar  jugador.o
     0x00003d40   0x00003d40   0x0000002e   Code   RO           37    .text.jugador_crear  jugador.o
     0x00003d6e   0x00003d6e   0x00000002   PAD
     0x00003d70   0x00003d70   0x0000001a   Code   RO           67    .text.jugador_dibujar  jugador.o
     0x00003d8a   0x00003d8a   0x00000002   PAD
-    0x00003d8c   0x00003d8c   0x000000ac   Code   RO            2    .text.main          main.o
-    0x00003e38   0x00003e38   0x00000048   Code   RO           61    .text.matar_jugador  jugador.o
-    0x00003e80   0x00003e80   0x00000114   Code   RO           15    .text.nunchuk_inicializar  nunchuk.o
-    0x00003f94   0x00003f94   0x000000d0   Code   RO           17    .text.nunchuk_leer  nunchuk.o
-    0x00004064   0x00004064   0x000000c0   Code   RO          197    .text.parar_con_error  lpc40xx_base.lib(error.o)
-    0x00004124   0x00004124   0x000000f8   Code   RO           65    .text.resetear_nivel  jugador.o
-    0x0000421c   0x0000421c   0x00000004   PAD
+    0x00003d8c   0x00003d8c   0x000000b4   Code   RO            2    .text.main          main.o
+    0x00003e40   0x00003e40   0x00000048   Code   RO           61    .text.matar_jugador  jugador.o
+    0x00003e88   0x00003e88   0x0000010e   Code   RO           15    .text.nunchuk_inicializar  nunchuk.o
+    0x00003f96   0x00003f96   0x00000002   PAD
+    0x00003f98   0x00003f98   0x000000d0   Code   RO           17    .text.nunchuk_leer  nunchuk.o
+    0x00004068   0x00004068   0x000000c0   Code   RO          197    .text.parar_con_error  lpc40xx_base.lib(error.o)
+    0x00004128   0x00004128   0x000000f8   Code   RO           65    .text.resetear_nivel  jugador.o
     0x00004220   0x00004220   0x000000a8   Code   RO           85    .text.samplear_rango  jugador.o
     0x000042c8   0x000042c8   0x0000053e   Code   RO          337    .text.sdram_inicializar  lpc40xx_base.lib(sdram.o)
     0x00004806   0x00004806   0x00000002   PAD
@@ -2340,18 +2340,18 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      4342         32        247         40       1540      11888   jugador.o
-       304          0         13          0          0       2143   main.o
-       484          0          0          0          0       2256   nunchuk.o
+      4342         32        247         40       1540      11894   jugador.o
+       312          0         13          0          0       2144   main.o
+       478          0          0          0          0       2255   nunchuk.o
        674         24          0          4         21       6768   sonido.o
-       180          0          0          0          0       1051   sprites.o
+       180          0          0          0          0       1059   sprites.o
         64         26        228          0       1024       1160   startup_lpc407x_8x_177x_8x.o
       2892          0          0         16          0       9755   system_lpc407x_8x_177x_8x.o
 
     ----------------------------------------------------------------------
-      8976         82        520         60       2594      35021   Object Totals
+      8976         82        520         60       2594      35035   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        36          0          0          0          9          0   (incl. Padding)
+        34          0          0          0          9          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2485,8 +2485,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     24978       1030      33262         68       2940      97498   Grand Totals
-     24978       1030      33262         68       2940      97498   ELF Image Totals
+     24978       1030      33262         68       2940      97512   Grand Totals
+     24978       1030      33262         68       2940      97512   ELF Image Totals
      24978       1030      33262         68          0          0   ROM Totals
 
 ==============================================================================

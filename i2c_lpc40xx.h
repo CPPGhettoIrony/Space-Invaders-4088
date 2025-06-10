@@ -1,4 +1,7 @@
 /***************************************************************************//**
+	LA SIGUIENTE LIBRERÍA HA SIDO DESCARGADA DE LA UNIVERSIDAD DE CÁDIZ
+	Autor original: Alejandro Lara Doña
+	
  * \file   i2c_lpc40xx.h
  *
  * \brief  Funciones de manejo de los interfaces I2C del LPC40x.
